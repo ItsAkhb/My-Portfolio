@@ -56,8 +56,8 @@
     z-index: 1;
   }
 
-  section{ padding: 120px 0; position: relative; }
-  @media (max-width: 640px){ section{ padding: 84px 0; } }
+  section{ padding: 76px 0; position: relative; }
+  @media (max-width: 640px){ section{ padding: 56px 0; } }
 
   .eyebrow{
     font-family: 'JetBrains Mono', monospace;
@@ -82,12 +82,12 @@
 
   /* ---------- HERO ---------- */
   .hero{
-    min-height: 92vh;
+    min-height: 82vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
   .hero-glow{
@@ -126,16 +126,31 @@
     stroke-dasharray: 6;
     stroke-dashoffset: 6;
     animation: dash-in 1.6s ease forwards;
+    transition: stroke 0.3s ease;
   }
   .hero-graph .edge.accent{ stroke: var(--accent-soft); }
+  .hero-graph:hover .edge{
+    stroke: var(--accent-soft);
+    animation: dash-in 1.6s ease forwards, marching 1.4s linear infinite;
+  }
+  @keyframes marching{ to{ stroke-dashoffset: -24; } }
   .hero-graph .node{
     fill: var(--bg);
     stroke: var(--accent);
     stroke-width: 1.6;
     opacity: 0;
     animation: node-in 0.5s ease forwards;
+    transition: transform 0.25s ease, fill 0.25s ease, stroke 0.25s ease;
+    transform-box: fill-box;
+    transform-origin: center;
+    cursor: pointer;
   }
   .hero-graph .node.g{ stroke: var(--green); }
+  .hero-graph .node:hover{
+    transform: scale(1.9);
+    fill: var(--accent);
+    stroke: var(--text);
+  }
   @keyframes dash-in{ to{ stroke-dashoffset: 0; } }
   @keyframes node-in{ to{ opacity: 1; } }
   @media (max-width: 900px){ .hero-graph{ display: none; } }
@@ -235,8 +250,17 @@
     fill: var(--bg-soft);
     stroke: var(--accent);
     stroke-width: 1.4;
+    transition: transform 0.2s ease, fill 0.2s ease;
+    transform-box: fill-box;
+    transform-origin: center;
+    cursor: pointer;
+  }
+  .seg-tree .st-node:hover{
+    transform: scale(1.5);
+    fill: var(--accent);
   }
   .seg-tree .st-node.leaf{ stroke: var(--green); }
+  .seg-tree .st-node.leaf:hover{ fill: var(--green); }
   .seg-tree .st-label{
     font-family: 'JetBrains Mono', monospace;
     font-size: 7px;
@@ -264,9 +288,18 @@
   .menu-item{
     display: flex;
     align-items: baseline;
-    padding: 11px 0;
+    padding: 11px 6px;
+    margin: 0 -6px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-radius: 3px;
+    transition: background 0.25s ease, transform 0.25s ease;
   }
+  .menu-item:hover{
+    background: rgba(207,149,86,0.06);
+    transform: translateX(4px);
+  }
+  .menu-item:hover .menu-leader{ opacity: 1; border-color: var(--accent); }
+  .menu-item:hover .menu-tag{ color: var(--accent); }
   .menu-item:last-child{ border-bottom: none; }
   .menu-name{
     font-size: 1rem;
@@ -279,6 +312,7 @@
     opacity: 0.5;
     margin: 0 10px;
     height: 0.6em;
+    transition: opacity 0.25s ease, border-color 0.25s ease;
   }
   .menu-tag{
     font-family: 'JetBrains Mono', monospace;
@@ -287,6 +321,7 @@
     text-transform: uppercase;
     color: var(--green);
     white-space: nowrap;
+    transition: color 0.25s ease;
   }
 
   .menu-note{
