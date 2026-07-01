@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Khatibi — Competitive Programmer</title>
+<meta name="description" content="Ali Khatibi — student, competitive programmer, Computer Olympiad trainee.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #17120e;
+    --bg-soft: #1d1712;
+    --surface: #241c15;
+    --surface-border: #3c2f22;
+    --text: #f1e7d8;
+    --text-muted: #a89478;
+    --text-dim: #7a6b57;
+    --accent: #cf9556;
+    --accent-soft: #8a5a30;
+    --green: #7a9a72;
+    --shadow: rgba(0,0,0,0.35);
+    --maxw: 880px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(207,149,86,0.05), transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(122,154,114,0.04), transparent 50%);
+    z-index: 0;
+  }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  section{ padding: 120px 0; position: relative; }
+  @media (max-width: 640px){ section{ padding: 84px 0; } }
+
+  .eyebrow{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .eyebrow::before{
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  h1,h2,h3{ font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.01em; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .hero-glow{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(207,149,86,0.16) 0%, rgba(207,149,86,0) 70%);
+    filter: blur(20px);
+    animation: breathe 7s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes breathe{
+    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+  }
+
+  .hero-graph{
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    transform: translateY(-50%);
+    width: 340px;
+    height: 340px;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-graph .edge{
+    stroke: var(--text-dim);
+    stroke-width: 1.2;
+    fill: none;
+    stroke-dasharray: 6;
+    stroke-dashoffset: 6;
+    animation: dash-in 1.6s ease forwards;
+  }
+  .hero-graph .edge.accent{ stroke: var(--accent-soft); }
+  .hero-graph .node{
+    fill: var(--bg);
+    stroke: var(--accent);
+    stroke-width: 1.6;
+    opacity: 0;
+    animation: node-in 0.5s ease forwards;
+  }
+  .hero-graph .node.g{ stroke: var(--green); }
+  @keyframes dash-in{ to{ stroke-dashoffset: 0; } }
+  @keyframes node-in{ to{ opacity: 1; } }
+  @media (max-width: 900px){ .hero-graph{ display: none; } }
+
+  .hero-name{
+    font-size: clamp(2.6rem, 8vw, 5.2rem);
+    line-height: 1.02;
+    color: var(--text);
+  }
+
+  .hero-name em{
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-tagline{
+    max-width: 560px;
+    margin-top: 28px;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    color: var(--text-muted);
+  }
+
+  .hero-meta{
+    margin-top: 40px;
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  .hero-meta span{ color: var(--green); }
+
+  .scroll-cue{
+    margin-top: 64px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .scroll-cue .line{
+    width: 1px;
+    height: 28px;
+    background: linear-gradient(var(--text-dim), transparent);
+    animation: drop 1.8s ease-in-out infinite;
+  }
+  @keyframes drop{
+    0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in-view{ opacity: 1; transform: translateY(0); }
+
+  /* ---------- ABOUT ---------- */
+  .about p{
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 620px;
+  }
+  .about p + p{ margin-top: 18px; }
+  .about strong{ color: var(--text); font-weight: 600; }
+
+  /* ---------- MENU (skills) ---------- */
+  .menu-card{
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 4px;
+    padding: 40px 36px;
+    max-width: 560px;
+    box-shadow: 0 20px 40px var(--shadow);
+  }
+  .seg-tree{
+    display: block;
+    margin: 0 auto 18px;
+    width: 220px;
+    height: 92px;
+    opacity: 0.7;
+  }
+  .seg-tree .st-edge{
+    stroke: var(--text-dim);
+    stroke-width: 1.2;
+    opacity: 0.6;
+  }
+  .seg-tree .st-node{
+    fill: var(--bg-soft);
+    stroke: var(--accent);
+    stroke-width: 1.4;
+  }
+  .seg-tree .st-node.leaf{ stroke: var(--green); }
+  .seg-tree .st-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7px;
+    fill: var(--text-dim);
+    text-anchor: middle;
+  }
+
+  .menu-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .menu-sub{
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+  }
+  .menu-item{
+    display: flex;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .menu-item:last-child{ border-bottom: none; }
+  .menu-name{
+    font-size: 1rem;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .menu-leader{
+    flex: 1;
+    border-bottom: 2px dotted var(--text-dim);
+    opacity: 0.5;
+    margin: 0 10px;
+    height: 0.6em;
+  }
+  .menu-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green);
+    white-space: nowrap;
+  }
+
+  .menu-note{
+    max-width: 560px;
+    margin-top: 14px;
+    padding-left: 4px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  /* ---------- INTERESTS ---------- */
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 8px;
+  }
+  @media (max-width: 700px){ .cards{ grid-template-columns: 1fr; } }
+  .card{
+    background: var(--bg-soft);
+    border: 1px solid var(--surface-border);
+    border-radius: 4px;
+    padding: 28px 22px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .card:hover{ border-color: var(--accent-soft); transform: translateY(-3px); }
+  .card .icon{ font-size: 1.4rem; margin-bottom: 14px; display: block; }
+  .card h3{ font-size: 1.05rem; margin-bottom: 8px; color: var(--text); }
+  .card p{ font-size: 0.92rem; color: var(--text-muted); }
+
+  /* ---------- PROJECTS (empty state) ---------- */
+  .empty-box{
+    border: 1px dashed var(--surface-border);
+    border-radius: 4px;
+    padding: 40px 32px;
+    max-width: 560px;
+  }
+  .empty-box p{ color: var(--text-muted); margin-bottom: 20px; }
+  .empty-box p:last-of-type{ margin-bottom: 0; }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: 1px solid var(--surface-border);
+    border-radius: 4px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    background: var(--bg-soft);
+  }
+  .btn:hover{ border-color: var(--accent); background: var(--surface); transform: translateY(-2px); }
+  .btn svg{ width: 18px; height: 18px; flex-shrink: 0; }
+  .btn:focus-visible, a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding: 48px 0 60px;
+    text-align: center;
+  }
+  footer p{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <svg class="hero-graph" viewBox="0 0 300 300" aria-hidden="true">
+      <line class="edge" x1="60" y1="50" x2="150" y2="30" style="animation-delay:.1s"/>
+      <line class="edge" x1="150" y1="30" x2="230" y2="80" style="animation-delay:.2s"/>
+      <line class="edge accent" x1="230" y1="80" x2="250" y2="170" style="animation-delay:.3s"/>
+      <line class="edge" x1="250" y1="170" x2="190" y2="230" style="animation-delay:.4s"/>
+      <line class="edge" x1="190" y1="230" x2="100" y2="220" style="animation-delay:.5s"/>
+      <line class="edge accent" x1="100" y1="220" x2="40" y2="150" style="animation-delay:.6s"/>
+      <line class="edge" x1="40" y1="150" x2="60" y2="50" style="animation-delay:.7s"/>
+      <line class="edge" x1="60" y1="50" x2="160" y2="140" style="animation-delay:.8s"/>
+      <line class="edge accent" x1="160" y1="140" x2="250" y2="170" style="animation-delay:.9s"/>
+      <line class="edge" x1="160" y1="140" x2="100" y2="220" style="animation-delay:1s"/>
+      <circle class="node" cx="60" cy="50" r="5" style="animation-delay:1.1s"/>
+      <circle class="node g" cx="150" cy="30" r="5" style="animation-delay:1.15s"/>
+      <circle class="node" cx="230" cy="80" r="5" style="animation-delay:1.2s"/>
+      <circle class="node g" cx="250" cy="170" r="5" style="animation-delay:1.25s"/>
+      <circle class="node" cx="190" cy="230" r="5" style="animation-delay:1.3s"/>
+      <circle class="node" cx="100" cy="220" r="5" style="animation-delay:1.35s"/>
+      <circle class="node g" cx="40" cy="150" r="5" style="animation-delay:1.4s"/>
+      <circle class="node" cx="160" cy="140" r="6" style="animation-delay:1.45s"/>
+    </svg>
+    <div class="reveal in-view">
+      <div class="eyebrow">grade 12 · training for the computer olympiad</div>
+      <h1 class="hero-name">Ali <em>Khatibi</em></h1>
+      <p class="hero-tagline">Student at Hasheminejad High School. I spend most of my time on C++ and algorithms, and the rest of it on a volleyball court, in a café, or with music on.</p>
+      <div class="hero-meta">
+        <div><span>&gt;</span> competitive programmer</div>
+        <div><span>&gt;</span> Mashhad, Iran</div>
+      </div>
+      <div class="scroll-cue"><span class="line" aria-hidden="true"></span> scroll</div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="reveal">
+      <div class="eyebrow">about</div>
+      <p>I'm a 12th grader at <strong>Hasheminejad High School</strong>, currently training for the <strong>Computer Olympiad</strong>. Most of my practice happens in C++ — breaking problems down, finding the right data structure, and racing the clock in competitive programming rounds.</p>
+      <p>Off the screen, I'm probably on a volleyball court, listening to something new, or debating what to order at whatever café I've ended up in. I'm still early in this — no shipped projects yet — but I like the process of getting better, one problem at a time.</p>
+    </div>
+  </section>
+
+  <section class="skills">
+    <div class="reveal">
+      <div class="eyebrow">the menu</div>
+      <div class="menu-card">
+        <svg class="seg-tree" viewBox="0 0 220 92" aria-hidden="true">
+          <line class="st-edge" x1="110" y1="10" x2="55" y2="40"/>
+          <line class="st-edge" x1="110" y1="10" x2="165" y2="40"/>
+          <line class="st-edge" x1="55" y1="40" x2="25" y2="72"/>
+          <line class="st-edge" x1="55" y1="40" x2="85" y2="72"/>
+          <line class="st-edge" x1="165" y1="40" x2="135" y2="72"/>
+          <line class="st-edge" x1="165" y1="40" x2="195" y2="72"/>
+          <circle class="st-node" cx="110" cy="10" r="7"/>
+          <circle class="st-node" cx="55" cy="40" r="6"/>
+          <circle class="st-node" cx="165" cy="40" r="6"/>
+          <circle class="st-node leaf" cx="25" cy="72" r="5"/>
+          <circle class="st-node leaf" cx="85" cy="72" r="5"/>
+          <circle class="st-node leaf" cx="135" cy="72" r="5"/>
+          <circle class="st-node leaf" cx="195" cy="72" r="5"/>
+          <text class="st-label" x="110" y="4">1,8</text>
+          <text class="st-label" x="55" y="34">1,4</text>
+          <text class="st-label" x="165" y="34">5,8</text>
+        </svg>
+        <div class="menu-title">Training Menu</div>
+        <div class="menu-sub">— served in C++, best with coffee —</div>
+
+        <div class="menu-item">
+          <span class="menu-name">C++</span>
+          <span class="menu-leader" aria-hidden="true"></span>
+          <span class="menu-tag">daily driver</span>
+        </div>
+        <div class="menu-item">
+          <span class="menu-name">Algorithms</span>
+          <span class="menu-leader" aria-hidden="true"></span>
+          <span class="menu-tag">core</span>
+        </div>
+        <div class="menu-item">
+          <span class="menu-name">Data Structures</span>
+          <span class="menu-leader" aria-hidden="true"></span>
+          <span class="menu-tag">core</span>
+        </div>
+        <div class="menu-item">
+          <span class="menu-name">Competitive Programming</span>
+          <span class="menu-leader" aria-hidden="true"></span>
+          <span class="menu-tag">in training</span>
+        </div>
+        <div class="menu-item">
+          <span class="menu-name">Computer Olympiad Prep</span>
+          <span class="menu-leader" aria-hidden="true"></span>
+          <span class="menu-tag">in training</span>
+        </div>
+      </div>
+      <p class="menu-note">— also brews a decent cup and can do a bit of latte art, off the menu —</p>
+    </div>
+  </section>
+
+  <section class="interests">
+    <div class="reveal">
+      <div class="eyebrow">away from the screen</div>
+      <div class="cards">
+        <div class="card">
+          <span class="icon">🏐</span>
+          <h3>Volleyball</h3>
+          <p>On the court more often than not.</p>
+        </div>
+        <div class="card">
+          <span class="icon">🎧</span>
+          <h3>Music</h3>
+          <p>There's usually something playing in the background.</p>
+        </div>
+        <div class="card">
+          <span class="icon">☕</span>
+          <h3>Cafés</h3>
+          <p>Unofficial expert in cozy corners and good coffee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects">
+    <div class="reveal">
+      <div class="eyebrow">projects</div>
+      <div class="empty-box">
+        <p>Nothing shipped here yet — I'm still deep in training.</p>
+        <p>My solved problems and practice code live on GitHub. Check back later, or take a look now.</p>
+        <a class="btn" href="https://github.com/ItsAkhb" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          View GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="reveal">
+      <div class="eyebrow">connect</div>
+      <div class="contact-grid">
+        <a class="btn" href="https://github.com/ItsAkhb" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="https://t.me/ItsAkhb" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.05 3.24 2.9 10.66c-1.3.52-1.29 1.24-.24 1.56l4.9 1.53 1.9 5.86c.23.63.4.88.82.88.4 0 .58-.18.8-.4l1.94-1.88 4.03 2.97c.74.41 1.28.2 1.47-.68l2.66-12.53c.28-1.15-.44-1.67-1.13-1.73Zm-13 9.86-1.5-.47L18.4 6.8c.3-.18.58.04.32.28l-9.67 8.02Z"/></svg>
+          Telegram
+        </a>
+        <a class="btn" href="mailto:ak88hb@gmail.com">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13Zm2.2.5 7.8 6.1L19.8 6H4.2Zm-.2 1.4V18h16V7.4l-7.55 5.92a1 1 0 0 1-1.2 0L4 7.4Z"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Ali Khatibi · built one problem at a time</p>
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal:not(.in-view)').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
