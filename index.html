@@ -100,9 +100,41 @@
     text-decoration: none;
     padding: 8px 12px;
     border-radius: 3px;
-    transition: color 0.25s ease, background 0.25s ease;
+    position: relative;
+    transition: color 0.3s ease, background 0.3s ease;
   }
+  .nav-links a::after{
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 3px;
+    height: 1.5px;
+    background: var(--accent);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  html[dir="rtl"] .nav-links a::after{ transform-origin: right; }
+  .nav-links a:hover::after,
+  .nav-links a.active::after{ transform: scaleX(1); }
   .nav-links a:hover{ color: var(--accent); background: rgba(207,149,86,0.07); }
+  .nav-links a.active{ color: var(--accent); }
+
+  .scroll-progress{
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 2px;
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+    transition: transform 0.1s linear;
+    z-index: 1;
+  }
+  html[dir="rtl"] .scroll-progress{ transform-origin: right; }
   @media (max-width: 700px){
     .topnav-inner{ padding: 0 16px; height: 54px; }
     .nav-brand{ font-size: 0.75rem; }
@@ -392,6 +424,12 @@
     text-align: right;
     transition: color 0.25s ease;
   }
+  .cf-link{
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed currentColor;
+  }
+  .cf-link:hover{ color: var(--accent); }
   @media (max-width: 560px){
     .menu-card{ padding: 30px 20px; max-width: 100%; }
     .menu-tag{ font-size: 0.68rem; }
@@ -568,6 +606,143 @@
   @media (prefers-reduced-motion: reduce){
     *{ animation: none !important; transition: none !important; }
   }
+
+  /* ---------- LANGUAGE TOGGLE ---------- */
+  .lang-btn{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--surface-border);
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background 0.25s ease;
+    flex-shrink: 0;
+  }
+  .lang-btn:hover{ border-color: var(--accent); background: rgba(207,149,86,0.07); }
+
+  /* ---------- SMOOTH NAV SCROLL FALLBACK ---------- */
+  html.nav-anim{ scroll-behavior: smooth; }
+
+  /* ---------- HERO TYPING / CARET ---------- */
+  .hero-meta div{ white-space: nowrap; }
+  .hero-meta .type-caret{
+    display: inline-block;
+    width: 7px;
+    height: 1em;
+    margin-left: 3px;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    opacity: 1;
+    animation: caret-blink 1s step-end infinite;
+  }
+  @keyframes caret-blink{ 0%, 49%{ opacity: 1; } 50%, 100%{ opacity: 0; } }
+
+  /* ---------- STAGGERED REVEALS ---------- */
+  .cards .card{
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.8, 0.3, 1), border-color 0.3s ease;
+  }
+  .cards.in-view .card{ opacity: 1; transform: translateY(0); }
+  .cards.in-view .card:nth-child(1){ transition-delay: 0s; }
+  .cards.in-view .card:nth-child(2){ transition-delay: 0.12s; }
+  .cards.in-view .card:nth-child(3){ transition-delay: 0.24s; }
+
+  .menu-card{
+    opacity: 0;
+    transform: translateY(28px) rotate(-0.4deg);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.8, 0.3, 1), border-color 0.3s ease;
+  }
+  .menu-card.in-view{ opacity: 1; transform: translateY(0) rotate(0); }
+
+  .project-card{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.8, 0.3, 1), border-color 0.3s ease;
+  }
+  .project-card.in-view{ opacity: 1; transform: translateY(0); }
+
+  /* ---------- MICRO ANIMATIONS ---------- */
+  .project-icon{
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease, border-color 0.3s ease;
+  }
+  .project-card:hover .project-icon{
+    transform: translateY(-3px) rotate(-4deg);
+    color: var(--text);
+  }
+  .seg-tree .st-node{
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.3s ease;
+  }
+  .seg-tree.in-view .st-node{ animation: node-float 4s ease-in-out infinite; }
+  .seg-tree.in-view .st-node:nth-child(odd){ animation-delay: 0.6s; }
+  @keyframes node-float{
+    0%, 100%{ transform: translateY(0); }
+    50%{ transform: translateY(-2px); }
+  }
+  .lang-btn:active{ transform: scale(0.92); }
+  .lang-btn{ transition: border-color 0.25s ease, background 0.25s ease, transform 0.15s ease; }
+  #langFade{ animation: lang-fade 0.45s ease; }
+  @keyframes lang-fade{
+    from{ opacity: 0.35; }
+    to{ opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-meta .type-caret{ animation: none; }
+    .cards .card, .menu-card, .project-card{ opacity: 1; transform: none; transition: none; }
+    .seg-tree .st-node{ animation: none !important; }
+  }
+
+  /* ---------- PERSIAN / RTL ---------- */
+  html[lang="fa"] body{
+    font-family: 'Vazirmatn', 'Space Grotesk', sans-serif;
+  }
+  html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3{
+    font-family: 'Vazirmatn', sans-serif;
+    letter-spacing: 0;
+  }
+  html[lang="fa"] .hero-name{ line-height: 1.25; }
+  html[lang="fa"] .eyebrow,
+  html[lang="fa"] .menu-title,
+  html[lang="fa"] .menu-sub,
+  html[lang="fa"] .menu-tag,
+  html[lang="fa"] .project-sub,
+  html[lang="fa"] footer p,
+  html[lang="fa"] .hero-meta{
+    font-family: 'Vazirmatn', sans-serif;
+    letter-spacing: 0;
+  }
+  html[lang="fa"] .eyebrow{ text-transform: none; }
+  html[lang="fa"] .eyebrow::before{ display: none; }
+  html[lang="fa"] [dir="rtl"] .menu-item{ direction: rtl; }
+  html[dir="rtl"] .hero-graph{ right: auto; left: -40px; }
+  html[dir="rtl"] .menu-note,
+  html[dir="rtl"] .hero-tagline,
+  html[dir="rtl"] .project-desc{ text-align: right; }
+  html[dir="rtl"] .project-features li{ padding-left: 0; padding-right: 20px; }
+  html[dir="rtl"] .project-features li::before{ left: auto; right: 4px; }
+  html[dir="rtl"] .menu-item:hover{ transform: translateX(-4px); }
+  html[dir="rtl"] .nav-brand{ letter-spacing: 0; }
+  html[dir="rtl"] footer p{ letter-spacing: 0; }
+  html[dir="rtl"] .hero-meta{ direction: rtl; }
+  html[dir="rtl"] .project-stack span{ letter-spacing: 0; }
+  html[dir="rtl"] .nav-links a{
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: 8px 11px;
+  }
+  html[dir="rtl"] .nav-links a:nth-child(3){ display: inline-block; }
+  html[dir="rtl"] .lang-btn{
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.06em;
+  }
 </style>
 </head>
 <body>
@@ -576,12 +751,14 @@
   <div class="topnav-inner">
     <a class="nav-brand" href="#top">Ali<em>.</em>Khatibi</a>
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#interests">Interests</a>
-      <a href="#contact">Contact</a>
+      <a href="#about" data-i18n="nav-about">About</a>
+      <a href="#interests" data-i18n="nav-interests">Interests</a>
+      <a href="#projects" data-i18n="nav-projects">Projects</a>
+      <a href="#contact" data-i18n="nav-contact">Contact</a>
+      <button class="lang-btn" id="langToggle" type="button" aria-label="Switch language">FA</button>
     </div>
   </div>
+  <div class="scroll-progress" aria-hidden="true"></div>
 </nav>
 
 <div class="wrap" id="top">
@@ -609,29 +786,29 @@
       <circle class="node" cx="160" cy="140" r="6" style="animation-delay:1.45s"/>
     </svg>
     <div class="reveal in-view">
-      <div class="eyebrow">grade 12 · konkur math–physics · occasional builder</div>
+      <div class="eyebrow" data-i18n="hero-eyebrow">grade 12 · konkur math–physics · occasional builder</div>
       <h1 class="hero-name">Ali <em>Khatibi</em></h1>
-      <p class="hero-tagline">Konkur student by day, hobbyist coder after hours. I build small tools for the fun of it — most recently <a href="#projects" class="inline-link">TestBox</a> — and I'm spending this year on the math–physics track.</p>
+      <p class="hero-tagline" data-i18n-html="hero-tagline">Konkur student by day, hobbyist coder after hours. I build small tools for the fun of it — most recently <a href="#projects" class="inline-link">TestBox</a> — and I'm spending this year on the math–physics track.</p>
       <div class="hero-meta">
-        <div><span>&gt;</span> konkur candidate</div>
-        <div><span>&gt;</span> built TestBox</div>
-        <div><span>&gt;</span> Mashhad, Iran</div>
+        <div><span>&gt;</span> <span data-i18n="hero-meta-1">konkur candidate</span></div>
+        <div><span>&gt;</span> <span data-i18n="hero-meta-2">built TestBox</span></div>
+        <div><span>&gt;</span> <span data-i18n="hero-meta-3">Mashhad, Iran</span></div>
       </div>
-      <div class="scroll-cue"><span class="line" aria-hidden="true"></span> scroll</div>
+      <div class="scroll-cue"><span class="line" aria-hidden="true"></span> <span data-i18n="hero-scroll">scroll</span></div>
     </div>
   </section>
 
   <section class="about" id="about">
     <div class="reveal">
-      <div class="eyebrow">about</div>
-      <p>I'm a 12th grader at <strong>Hasheminejad High School</strong> in Mashhad, spending this year preparing for the <strong>konkur</strong> on the math–physics track. Before that, I spent a few good years deep in C++ and algorithms as a <strong>Computer Olympiad</strong> trainee — including competing in Round 2 of the national olympiad, where my run ended.</p>
-      <p>The olympiad taught me how to think; programming is how I relax. I still write code for the fun of it — small tools built to learn something new, like <strong>TestBox</strong>, an offline-first study app I actually use myself. Off the screen: volleyball court, good playlists, and a never-ending debate over what to order at the café.</p>
+      <div class="eyebrow" data-i18n="about-eyebrow">about</div>
+      <p data-i18n-html="about-p1">I'm a 12th grader at <strong>Hasheminejad High School</strong> in Mashhad, spending this year preparing for the <strong>konkur</strong> on the math–physics track. Before that, I spent a few good years deep in C++ and algorithms as a <strong>Computer Olympiad</strong> trainee — including competing in Round 2 of the national olympiad, where my run ended.</p>
+      <p data-i18n-html="about-p2">The olympiad taught me how to think; programming is how I relax. I still write code for the fun of it — small tools built to learn something new, like <strong>TestBox</strong>, an offline-first study app I actually use myself. Off the screen: volleyball court, good playlists, and a never-ending debate over what to order at the café.</p>
     </div>
   </section>
 
   <section class="skills">
     <div class="reveal">
-      <div class="eyebrow">the menu</div>
+      <div class="eyebrow" data-i18n="skills-eyebrow">the menu</div>
       <div class="menu-card">
         <svg class="seg-tree" viewBox="0 0 220 92" aria-hidden="true">
           <line class="st-edge" x1="110" y1="10" x2="55" y2="40"/>
@@ -651,57 +828,62 @@
           <text class="st-label" x="55" y="34">1,4</text>
           <text class="st-label" x="165" y="34">5,8</text>
         </svg>
-        <div class="menu-title">Training Menu</div>
-        <div class="menu-sub">— served in C++, best with coffee —</div>
+        <div class="menu-title" data-i18n="menu-title">Training Menu</div>
+        <div class="menu-sub" data-i18n="menu-sub">— served in C++, best with coffee —</div>
 
         <div class="menu-item">
-          <span class="menu-name">C++</span>
+          <span class="menu-name" data-i18n="menu-1">C++</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">first language</span>
+          <span class="menu-tag" data-i18n="menu-1t">first language</span>
         </div>
         <div class="menu-item">
-          <span class="menu-name">Algorithms & Data Structures</span>
+          <span class="menu-name" data-i18n="menu-2">Algorithms & Data Structures</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">olympiad-trained</span>
+          <span class="menu-tag" data-i18n="menu-2t">olympiad-trained</span>
         </div>
         <div class="menu-item">
-          <span class="menu-name">JavaScript / React</span>
+          <span class="menu-name" data-i18n="menu-3">JavaScript / React</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">TestBox</span>
+          <span class="menu-tag" data-i18n="menu-3t">TestBox</span>
         </div>
         <div class="menu-item">
-          <span class="menu-name">App Building</span>
+          <span class="menu-name" data-i18n="menu-4">App Building</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">web · windows · android</span>
+          <span class="menu-tag" data-i18n="menu-4t">web · windows · android</span>
         </div>
         <div class="menu-item">
-          <span class="menu-name">Math & Physics</span>
+          <span class="menu-name" data-i18n="menu-5">Math & Physics</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">konkur track</span>
+          <span class="menu-tag" data-i18n="menu-5t">konkur track</span>
+        </div>
+        <div class="menu-item">
+          <span class="menu-name" data-i18n="menu-6">Competitive Programming</span>
+          <span class="menu-leader" aria-hidden="true"></span>
+          <span class="menu-tag"><a class="cf-link" href="https://codeforces.com/profile/Akhb" target="_blank" rel="noopener">Akhb · specialist</a></span>
         </div>
       </div>
-      <p class="menu-note">— also brews a decent cup and can do a bit of latte art, off the menu —</p>
+      <p class="menu-note" data-i18n="menu-note">— also brews a decent cup and can do a bit of latte art, off the menu —</p>
     </div>
   </section>
 
   <section class="interests" id="interests">
     <div class="reveal">
-      <div class="eyebrow">away from the screen</div>
+      <div class="eyebrow" data-i18n="int-eyebrow">away from the screen</div>
       <div class="cards">
         <div class="card">
           <span class="icon">🏐</span>
-          <h3>Volleyball</h3>
-          <p>On the court more often than not.</p>
+          <h3 data-i18n="int-1">Volleyball</h3>
+          <p data-i18n="int-1p">On the court more often than not.</p>
         </div>
         <div class="card">
           <span class="icon">🎧</span>
-          <h3>Music</h3>
-          <p>There's usually something playing in the background.</p>
+          <h3 data-i18n="int-2">Music</h3>
+          <p data-i18n="int-2p">There's usually something playing in the background.</p>
         </div>
         <div class="card">
           <span class="icon">☕</span>
-          <h3>Cafés</h3>
-          <p>Unofficial expert in cozy corners and good coffee.</p>
+          <h3 data-i18n="int-3">Cafés</h3>
+          <p data-i18n="int-3p">Unofficial expert in cozy corners and good coffee.</p>
         </div>
       </div>
     </div>
@@ -709,7 +891,7 @@
 
   <section class="projects" id="projects">
     <div class="reveal">
-      <div class="eyebrow">projects</div>
+      <div class="eyebrow" data-i18n="proj-eyebrow">projects</div>
       <article class="project-card">
         <div class="project-head">
           <div class="project-icon" aria-hidden="true">
@@ -717,17 +899,17 @@
           </div>
           <div>
             <h3 class="project-title">TestBox</h3>
-            <p class="project-sub">offline-first study &amp; test companion — web · windows · android</p>
+            <p class="project-sub" data-i18n="proj-sub">offline-first study &amp; test companion — web · windows · android</p>
           </div>
         </div>
-        <p class="project-desc">
+        <p class="project-desc" data-i18n="proj-desc">
           An app I built to manage practice tests: organize exams into folders and subjects, solve sheets with an exam timer or practice stopwatch, track daily study on a calendar, and review marked questions. Everything works offline and syncs when you're back. Built for my own konkur prep — and it shows: I use it every day.
         </p>
         <ul class="project-features">
-          <li>Exam mode with negative marking &amp; practice stopwatch</li>
-          <li>Daily reports, streaks &amp; monthly activity calendar (Jalali &amp; Gregorian)</li>
-          <li>Offline-first sync — upload on reconnect, no lost edits</li>
-          <li>Full FA (RTL) &amp; EN, light &amp; dark themes</li>
+          <li data-i18n="proj-f1">Exam mode with negative marking &amp; practice stopwatch</li>
+          <li data-i18n="proj-f2">Daily reports, streaks &amp; monthly activity calendar (Jalali &amp; Gregorian)</li>
+          <li data-i18n="proj-f3">Offline-first sync — upload on reconnect, no lost edits</li>
+          <li data-i18n="proj-f4">Full FA (RTL) &amp; EN, light &amp; dark themes</li>
         </ul>
         <div class="project-stack">
           <span>React 19</span><span>Vite</span><span>Supabase</span><span>Electron</span><span>Capacitor</span>
@@ -735,29 +917,33 @@
         <div class="project-links">
           <a class="btn" href="https://itsakhb.github.io/TestBox/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
-            Live demo
+            <span data-i18n="proj-demo">Live demo</span>
           </a>
           <a class="btn" href="https://github.com/ItsAkhb/TestBox" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-            Source
+            <span data-i18n="proj-src">Source</span>
           </a>
           <a class="btn" href="https://github.com/ItsAkhb/TestBox/releases" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            Windows &amp; Android
+            <span data-i18n="proj-dl">Windows &amp; Android</span>
           </a>
         </div>
       </article>
-      <p class="menu-note" style="margin-top:18px">— more experiments stay in the drawer until they're worth showing —</p>
+      <p class="menu-note" style="margin-top:18px" data-i18n="proj-note">— more experiments stay in the drawer until they're worth showing —</p>
     </div>
   </section>
 
   <section class="contact" id="contact">
     <div class="reveal">
-      <div class="eyebrow">connect</div>
+      <div class="eyebrow" data-i18n="con-eyebrow">connect</div>
       <div class="contact-grid">
         <a class="btn" href="https://github.com/ItsAkhb" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
           GitHub
+        </a>
+        <a class="btn" href="https://codeforces.com/profile/Akhb" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.5 4.5h4.1v10.9h6.8v4.1H4.5V4.5Z"/><path d="M17.4 4.5h2.1c.55 0 1 .45 1 1v9.9c0 .55-.45 1-1 1h-2.1c-.55 0-1-.45-1-1V5.5c0-.55.45-1 1-1Z" opacity="0.85"/><path d="M21.9 4.5H24v0c0-.28-.22-.5-.5-.5h-1.6v.5Z" opacity="0"/></svg>
+          Codeforces
         </a>
         <a class="btn" href="https://t.me/ItsAkhb" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.05 3.24 2.9 10.66c-1.3.52-1.29 1.24-.24 1.56l4.9 1.53 1.9 5.86c.23.63.4.88.82.88.4 0 .58-.18.8-.4l1.94-1.88 4.03 2.97c.74.41 1.28.2 1.47-.68l2.66-12.53c.28-1.15-.44-1.67-1.13-1.73Zm-13 9.86-1.5-.47L18.4 6.8c.3-.18.58.04.32.28l-9.67 8.02Z"/></svg>
@@ -772,7 +958,7 @@
   </section>
 
   <footer>
-    <p>Ali Khatibi · konkur by day, code for fun</p>
+    <p data-i18n="footer">Ali Khatibi · konkur by day, code for fun</p>
   </footer>
 
 </div>
@@ -789,6 +975,42 @@
 
   document.querySelectorAll('.reveal:not(.in-view)').forEach(el => observer.observe(el));
 
+  // reveal menu/project/cards containers for staggered entry
+  ['.menu-card', '.project-card', '.cards', '.seg-tree'].forEach(sel => {
+    const el = document.querySelector(sel);
+    if (el) el.classList.add('i18n-observe');
+  });
+  const staggerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        staggerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.menu-card, .project-card, .cards, .seg-tree').forEach(el => staggerObserver.observe(el));
+
+  // ---------- smooth scroll with easing (never hangs) ----------
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let scrollAnimId = null;
+  function animateScrollTo(targetY, duration) {
+    if (scrollAnimId) cancelAnimationFrame(scrollAnimId);
+    if (prefersReduced) { window.scrollTo(0, targetY); return; }
+    const startY = window.scrollY;
+    const diff = targetY - startY;
+    if (Math.abs(diff) < 2) return;
+    const dur = duration || Math.min(750, Math.max(350, Math.abs(diff) * 0.35));
+    const t0 = performance.now();
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+    function step(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      window.scrollTo(0, startY + diff * easeOutCubic(p));
+      if (p < 1) scrollAnimId = requestAnimationFrame(step);
+      else scrollAnimId = null;
+    }
+    scrollAnimId = requestAnimationFrame(step);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
       const id = a.getAttribute('href').slice(1);
@@ -796,10 +1018,204 @@
       if (target) {
         e.preventDefault();
         const y = target.getBoundingClientRect().top + window.scrollY - 64;
-        window.scrollTo({ top: y, behavior: 'instant' });
+        animateScrollTo(y);
         history.replaceState(null, '', '#' + id);
       }
     });
+  });
+
+  // ---------- scrollspy + progress bar ----------
+  const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+  const sections = navLinks
+    .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+    .filter(Boolean);
+  const progressBar = document.querySelector('.scroll-progress');
+  let spyTicking = false;
+  function onScroll() {
+    if (!spyTicking) {
+      requestAnimationFrame(() => {
+        // progress
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const p = max > 0 ? window.scrollY / max : 0;
+        if (progressBar) progressBar.style.transform = 'scaleX(' + p + ')';
+        // spy
+        const probe = window.scrollY + 90;
+        let current = null;
+        for (const s of sections) {
+          if (s.offsetTop <= probe) current = s.id;
+        }
+        navLinks.forEach(a => a.classList.toggle('active', current === a.getAttribute('href').slice(1)));
+        spyTicking = false;
+      });
+      spyTicking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---------- hero typing effect ----------
+  const heroMetaSpans = document.querySelectorAll('.hero-meta [data-i18n]');
+  heroMetaSpans.forEach((span, idx) => {
+    const finalText = () => I18N[currentLang][span.dataset.i18n];
+    span.textContent = '';
+    span.style.opacity = '0';
+    span.style.opacity = '';
+    const caret = document.createElement('span');
+    caret.className = 'type-caret';
+    span.after(caret);
+    const delay = 400 + idx * 550;
+    setTimeout(() => {
+      const text = finalText();
+      let i = 0;
+      const tick = setInterval(() => {
+        span.textContent = text.slice(0, ++i);
+        if (i >= text.length) clearInterval(tick);
+      }, 28);
+    }, delay);
+  });
+  // retype on language switch
+  function retypeHeroMeta() {
+    heroMetaSpans.forEach((span, idx) => {
+      const text = I18N[currentLang][span.dataset.i18n];
+      span.textContent = '';
+      const oldCaret = span.nextElementSibling;
+      if (oldCaret && oldCaret.classList.contains('type-caret')) oldCaret.remove();
+      const caret = document.createElement('span');
+      caret.className = 'type-caret';
+      span.after(caret);
+      setTimeout(() => {
+        let i = 0;
+        const tick = setInterval(() => {
+          span.textContent = text.slice(0, ++i);
+          if (i >= text.length) clearInterval(tick);
+        }, 28);
+      }, 250 + idx * 450);
+    });
+  }
+
+  // ---------- hero graph mouse parallax ----------
+  const heroGraph = document.querySelector('.hero-graph');
+  const heroSection = document.querySelector('.hero');
+  if (heroGraph && heroSection && !prefersReduced) {
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      heroGraph.style.transform = 'translateY(-50%) translate(' + (nx * -18) + 'px, ' + (ny * -14) + 'px)';
+    });
+    heroSection.addEventListener('mouseleave', () => {
+      heroGraph.style.transform = 'translateY(-50%)';
+    });
+  }
+
+  // ---------- i18n ----------
+  const I18N = {
+    en: {
+      'nav-about': 'About', 'nav-projects': 'Projects', 'nav-interests': 'Interests', 'nav-contact': 'Contact',
+      'hero-eyebrow': 'grade 12 · konkur math–physics · occasional builder',
+      'hero-tagline': 'Konkur student by day, hobbyist coder after hours. I build small tools for the fun of it — most recently <a href="#projects" class="inline-link">TestBox</a> — and I\'m spending this year on the math–physics track.',
+      'hero-meta-1': 'konkur candidate', 'hero-meta-2': 'built TestBox', 'hero-meta-3': 'Mashhad, Iran',
+      'hero-scroll': 'scroll',
+      'about-eyebrow': 'about',
+      'about-p1': 'I\'m a 12th grader at <strong>Hasheminejad High School</strong> in Mashhad, spending this year preparing for the <strong>konkur</strong> on the math–physics track. Before that, I spent a few good years deep in C++ and algorithms as a <strong>Computer Olympiad</strong> trainee — including competing in Round 2 of the national olympiad, where my run ended.',
+      'about-p2': 'The olympiad taught me how to think; programming is how I relax. I still write code for the fun of it — small tools built to learn something new, like <strong>TestBox</strong>, an offline-first study app I actually use myself. Off the screen: volleyball court, good playlists, and a never-ending debate over what to order at the café.',
+      'skills-eyebrow': 'the menu',
+      'menu-title': 'Training Menu', 'menu-sub': '— served in C++, best with coffee —',
+      'menu-1': 'C++', 'menu-1t': 'first language',
+      'menu-2': 'Algorithms & Data Structures', 'menu-2t': 'olympiad-trained',
+      'menu-3': 'JavaScript / React', 'menu-3t': 'TestBox',
+      'menu-4': 'App Building', 'menu-4t': 'web · windows · android',
+      'menu-5': 'Math & Physics', 'menu-5t': 'konkur track',
+      'menu-6': 'Competitive Programming',
+      'menu-note': '— also brews a decent cup and can do a bit of latte art, off the menu —',
+      'int-eyebrow': 'away from the screen',
+      'int-1': 'Volleyball', 'int-1p': 'On the court more often than not.',
+      'int-2': 'Music', 'int-2p': 'There\'s usually something playing in the background.',
+      'int-3': 'Cafés', 'int-3p': 'Unofficial expert in cozy corners and good coffee.',
+      'proj-eyebrow': 'projects',
+      'proj-sub': 'offline-first study & test companion — web · windows · android',
+      'proj-desc': 'An app I built to manage practice tests: organize exams into folders and subjects, solve sheets with an exam timer or practice stopwatch, track daily study on a calendar, and review marked questions. Everything works offline and syncs when you\'re back. Built for my own konkur prep — and it shows: I use it every day.',
+      'proj-f1': 'Exam mode with negative marking & practice stopwatch',
+      'proj-f2': 'Daily reports, streaks & monthly activity calendar (Jalali & Gregorian)',
+      'proj-f3': 'Offline-first sync — upload on reconnect, no lost edits',
+      'proj-f4': 'Full FA (RTL) & EN, light & dark themes',
+      'proj-demo': 'Live demo', 'proj-src': 'Source', 'proj-dl': 'Windows & Android',
+      'proj-note': '— more experiments stay in the drawer until they\'re worth showing —',
+      'con-eyebrow': 'connect',
+      'footer': 'Ali Khatibi · konkur by day, code for fun',
+      'title': 'Ali Khatibi — Konkur Student & Hobbyist Coder'
+    },
+    fa: {
+      'nav-about': 'درباره', 'nav-projects': 'پروژه‌ها', 'nav-interests': 'علایق', 'nav-contact': 'ارتباط',
+      'hero-eyebrow': 'پایه دوازدهم · کنکور ریاضی‌فیزیک · برنامه‌نویس تفننی',
+      'hero-tagline': 'روزها پای کتاب کنکورم، وقت‌های آزاد هم پای کد. چیزهای کوچیکی می‌سازم فقط برای لذت ساختن — آخرینش <a href="#projects" class="inline-link">TestBox</a> بود — هرچند این روزها عمده وقتم به ریاضی و فیزیک می‌رسه.',
+      'hero-meta-1': 'کنکوری', 'hero-meta-2': 'سازنده TestBox', 'hero-meta-3': 'مشهد، ایران',
+      'hero-scroll': 'پایین',
+      'about-eyebrow': 'درباره من',
+      'about-p1': 'پایه دوازدهم <strong>هاشمی‌نژاد</strong> مشهدم و امسال تمام‌وقت درگیر <strong>کنکور ریاضی‌فیزیک</strong>. قبلش چند سال خوبی رو با <strong>المپیاد کامپیوتر</strong> گذروندم — ++C و الگوریتم، صبح تا شب. تا مرحله دوم هم رفتم، اونجا مسیرم به پایان رسید.',
+      'about-p2': 'المپیاد یادم داد چطور فکر کنم؛ برنامه‌نویسی شده راه تفریحم. هنوز گاهی برای لذت کد می‌زنم — چیزهای کوچیک برای یادگیری، مثل <strong>TestBox</strong> که یه اپ مطالعه آفلاینه و هر روز خودم ازش استفاده می‌کنم. بیرون از دنیای کد هم: زمین والیبال، یه پلی‌لیست همیشه‌پخش، و کلنجار همیشگی با منوی کافه.',
+      'skills-eyebrow': 'منو',
+      'menu-title': 'منوی تمرین', 'menu-sub': '— با طعم ++C، بهتره با قهوه میل بشه —',
+      'menu-1': '++C', 'menu-1t': 'زبان اول',
+      'menu-2': 'الگوریتم و ساختمان داده', 'menu-2t': 'دوران المپیاد',
+      'menu-3': 'جاوااسکریپت / ری‌اکت', 'menu-3t': 'TestBox',
+      'menu-4': 'ساخت اپ', 'menu-4t': 'وب · ویندوز · اندروید',
+      'menu-5': 'ریاضی و فیزیک', 'menu-5t': 'رشته کنکور',
+      'menu-6': 'برنامه‌نویسی رقابتی',
+      'menu-note': '— قهوه هم خوب دم می‌کنه و کمی لاته‌آرت هم بلده؛ خارج از منو —',
+      'int-eyebrow': 'وقتی پشت مانیتور نیستم',
+      'int-1': 'والیبال', 'int-1p': 'بیشتر وقت‌ها رو زمین پیدا می‌شه.',
+      'int-2': 'موسیقی', 'int-2p': 'معمولاً یه چیزی در پس‌زمینه پخش می‌شه.',
+      'int-3': 'کافه', 'int-3p': 'متخصص غیررسمی گوشه‌های دنج و قهوه خوب.',
+      'proj-eyebrow': 'پروژه‌ها',
+      'proj-sub': 'همراه مطالعه و آزمون، حتی آفلاین — وب · ویندوز · اندروید',
+      'proj-desc': 'اپی که برای مدیریت آزمون‌های تمرینی ساختم: آزمون‌ها رو تو پوشه و درس مرتب می‌کنی، با تایمر آزمون یا کرنومتر تمرین برگه می‌زنی، مطالعه روزانه‌ات رو روی تقویم می‌بینی و سوال‌های علامت‌دار رو مرور می‌کنی. همه‌ش آفلاین کار می‌کنه و اینترنت که برگرده خودش سینک می‌شه. برای کنکور خودم ساختمش — و انصافاً داره استفاده می‌شه: هر روز بازش می‌کنم.',
+      'proj-f1': 'حالت آزمون با نمره منفی + کرنومتر تمرین',
+      'proj-f2': 'گزارش روزانه، استریک و تقویم فعالیت ماهانه (جلالی و میلادی)',
+      'proj-f3': 'سینک آفلاین‌محور — اینترنت که اومد آپلود می‌شه، هیچ تغییری گم نمی‌شه',
+      'proj-f4': 'فارسی و انگلیسی کامل، تم روشن و تیره',
+      'proj-demo': 'نسخه آنلاین', 'proj-src': 'سورس کد', 'proj-dl': 'دانلود ویندوز و اندروید',
+      'proj-note': '— بقیه پروژه‌ها تو کشو مونده‌ان تا یه روزی درست‌وحسابی بشن —',
+      'con-eyebrow': 'راه‌های ارتباط',
+      'footer': 'علی خطیبی · روزها کنکور، شب‌ها کد',
+      'title': 'علی خطیبی — دانش‌آموز کنکور و برنامه‌نویس تفننی'
+    }
+  };
+
+  let currentLang = 'en';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+    document.title = I18N[lang]['title'];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = I18N[lang][el.dataset.i18n];
+      if (v !== undefined) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const v = I18N[lang][el.dataset.i18nHtml];
+      if (v !== undefined) el.innerHTML = v;
+    });
+    document.getElementById('langToggle').textContent = lang === 'fa' ? 'EN' : 'FA';
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+
+  const savedLang = (() => { try { return localStorage.getItem('lang'); } catch (e) { return null; } })();
+  applyLang(savedLang === 'fa' ? 'fa' : 'en');
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    const next = currentLang === 'fa' ? 'en' : 'fa';
+    const wrap = document.querySelector('.wrap');
+    if (wrap && !prefersReduced) {
+      wrap.id = 'langFade';
+      applyLang(next);
+      retypeHeroMeta();
+      setTimeout(() => { wrap.removeAttribute('id'); }, 500);
+    } else {
+      applyLang(next);
+      retypeHeroMeta();
+    }
   });
 </script>
 
