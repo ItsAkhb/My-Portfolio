@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ali Khatibi — Competitive Programmer</title>
-<meta name="description" content="Ali Khatibi — student, competitive programmer, Computer Olympiad trainee.">
+<title>Ali Khatibi — Konkur Student & Hobbyist Coder</title>
+<meta name="description" content="Ali Khatibi — grade 12 konkur student (math–physics), building small tools like TestBox for fun.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
@@ -25,8 +25,6 @@
   }
 
   *{ box-sizing: border-box; margin:0; padding:0; }
-
-  html{ scroll-behavior: smooth; }
 
   body{
     background: var(--bg);
@@ -56,8 +54,76 @@
     z-index: 1;
   }
 
-  section{ padding: 76px 0; position: relative; }
+  section{ padding: 76px 0; position: relative; scroll-margin-top: 64px; }
   @media (max-width: 640px){ section{ padding: 56px 0; } }
+
+  /* ---------- NAV ---------- */
+  .topnav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(23,18,14,0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .topnav-inner{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-brand{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .nav-brand em{ color: var(--accent); font-style: normal; }
+  .nav-links{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-links a{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 3px;
+    transition: color 0.25s ease, background 0.25s ease;
+  }
+  .nav-links a:hover{ color: var(--accent); background: rgba(207,149,86,0.07); }
+  @media (max-width: 700px){
+    .topnav-inner{ padding: 0 16px; height: 54px; }
+    .nav-brand{ font-size: 0.75rem; }
+    .nav-links{ gap: 0; }
+    .nav-links a{ padding: 8px 8px; font-size: 0.68rem; letter-spacing: 0.04em; }
+  }
+  @media (max-width: 400px){
+    .nav-brand{ font-size: 0.7rem; }
+    .nav-links a{ padding: 8px 6px; font-size: 0.64rem; }
+  }
+  @media (max-width: 350px){
+    .nav-links a[href="#interests"]{ display: none; }
+  }
+
+  .inline-link{
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+  .inline-link:hover{ color: var(--text); border-color: var(--text); }
 
   .eyebrow{
     font-family: 'JetBrains Mono', monospace;
@@ -88,6 +154,7 @@
     justify-content: center;
     padding-top: 40px;
     padding-bottom: 40px;
+    overflow: hidden;
   }
 
   .hero-glow{
@@ -293,6 +360,8 @@
     border-bottom: 1px solid rgba(255,255,255,0.04);
     border-radius: 3px;
     transition: background 0.25s ease, transform 0.25s ease;
+    flex-wrap: wrap;
+    row-gap: 2px;
   }
   .menu-item:hover{
     background: rgba(207,149,86,0.06);
@@ -304,10 +373,10 @@
   .menu-name{
     font-size: 1rem;
     color: var(--text);
-    white-space: nowrap;
   }
   .menu-leader{
     flex: 1;
+    min-width: 0;
     border-bottom: 2px dotted var(--text-dim);
     opacity: 0.5;
     margin: 0 10px;
@@ -320,8 +389,17 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--green);
-    white-space: nowrap;
+    text-align: right;
     transition: color 0.25s ease;
+  }
+  @media (max-width: 560px){
+    .menu-card{ padding: 30px 20px; max-width: 100%; }
+    .menu-tag{ font-size: 0.68rem; }
+  }
+  @media (max-width: 400px){
+    .menu-item{ display: block; }
+    .menu-leader{ display: none; }
+    .menu-tag{ text-align: left; padding-left: 2px; margin-top: 2px; }
   }
 
   .menu-note{
@@ -355,15 +433,94 @@
   .card h3{ font-size: 1.05rem; margin-bottom: 8px; color: var(--text); }
   .card p{ font-size: 0.92rem; color: var(--text-muted); }
 
-  /* ---------- PROJECTS (empty state) ---------- */
-  .empty-box{
-    border: 1px dashed var(--surface-border);
+  /* ---------- PROJECTS (TestBox) ---------- */
+  .project-card{
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
     border-radius: 4px;
-    padding: 40px 32px;
-    max-width: 560px;
+    padding: 36px 32px;
+    max-width: 640px;
+    box-shadow: 0 20px 40px var(--shadow);
+    transition: border-color 0.3s ease;
   }
-  .empty-box p{ color: var(--text-muted); margin-bottom: 20px; }
-  .empty-box p:last-of-type{ margin-bottom: 0; }
+  .project-card:hover{ border-color: var(--accent-soft); }
+  .project-head{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .project-icon{
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--accent-soft);
+    border-radius: 4px;
+    color: var(--accent);
+    background: var(--bg-soft);
+  }
+  .project-icon svg{ width: 26px; height: 26px; }
+  .project-title{ font-size: 1.45rem; color: var(--text); }
+  .project-sub{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-top: 4px;
+  }
+  .project-desc{
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    margin-bottom: 18px;
+  }
+  .project-features{
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  .project-features li{
+    position: relative;
+    padding-left: 20px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 7px;
+  }
+  .project-features li::before{
+    content: "›";
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .project-stack{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .project-stack span{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    padding: 5px 10px;
+    border: 1px solid var(--surface-border);
+    border-radius: 3px;
+    color: var(--text-dim);
+    background: var(--bg-soft);
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .project-card:hover .project-stack span{ color: var(--text-muted); }
+  .project-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  @media (max-width: 640px){
+    .project-card{ padding: 26px 20px; }
+    .project-links .btn{ flex: 1 1 auto; justify-content: center; }
+  }
 
   /* ---------- BUTTONS ---------- */
   .btn{
@@ -410,13 +567,24 @@
 
   @media (prefers-reduced-motion: reduce){
     *{ animation: none !important; transition: none !important; }
-    html{ scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="nav-brand" href="#top">Ali<em>.</em>Khatibi</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#interests">Interests</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
 
   <section class="hero">
     <div class="hero-glow" aria-hidden="true"></div>
@@ -441,22 +609,23 @@
       <circle class="node" cx="160" cy="140" r="6" style="animation-delay:1.45s"/>
     </svg>
     <div class="reveal in-view">
-      <div class="eyebrow">grade 12 · training for the computer olympiad</div>
+      <div class="eyebrow">grade 12 · konkur math–physics · occasional builder</div>
       <h1 class="hero-name">Ali <em>Khatibi</em></h1>
-      <p class="hero-tagline">Student at Hasheminejad High School. I spend most of my time on C++ and algorithms, and the rest of it on a volleyball court, in a café, or with music on.</p>
+      <p class="hero-tagline">Konkur student by day, hobbyist coder after hours. I build small tools for the fun of it — most recently <a href="#projects" class="inline-link">TestBox</a> — and I'm spending this year on the math–physics track.</p>
       <div class="hero-meta">
-        <div><span>&gt;</span> competitive programmer</div>
+        <div><span>&gt;</span> konkur candidate</div>
+        <div><span>&gt;</span> built TestBox</div>
         <div><span>&gt;</span> Mashhad, Iran</div>
       </div>
       <div class="scroll-cue"><span class="line" aria-hidden="true"></span> scroll</div>
     </div>
   </section>
 
-  <section class="about">
+  <section class="about" id="about">
     <div class="reveal">
       <div class="eyebrow">about</div>
-      <p>I'm a 12th grader at <strong>Hasheminejad High School</strong>, currently training for the <strong>Computer Olympiad</strong>. Most of my practice happens in C++ — breaking problems down, finding the right data structure, and racing the clock in competitive programming rounds.</p>
-      <p>Off the screen, I'm probably on a volleyball court, listening to something new, or debating what to order at whatever café I've ended up in. I'm still early in this — no shipped projects yet — but I like the process of getting better, one problem at a time.</p>
+      <p>I'm a 12th grader at <strong>Hasheminejad High School</strong> in Mashhad, spending this year preparing for the <strong>konkur</strong> on the math–physics track. Before that, I spent a few good years deep in C++ and algorithms as a <strong>Computer Olympiad</strong> trainee — including competing in Round 2 of the national olympiad, where my run ended.</p>
+      <p>The olympiad taught me how to think; programming is how I relax. I still write code for the fun of it — small tools built to learn something new, like <strong>TestBox</strong>, an offline-first study app I actually use myself. Off the screen: volleyball court, good playlists, and a never-ending debate over what to order at the café.</p>
     </div>
   </section>
 
@@ -488,34 +657,34 @@
         <div class="menu-item">
           <span class="menu-name">C++</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">daily driver</span>
+          <span class="menu-tag">first language</span>
         </div>
         <div class="menu-item">
-          <span class="menu-name">Algorithms</span>
+          <span class="menu-name">Algorithms & Data Structures</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">core</span>
+          <span class="menu-tag">olympiad-trained</span>
         </div>
         <div class="menu-item">
-          <span class="menu-name">Data Structures</span>
+          <span class="menu-name">JavaScript / React</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">core</span>
+          <span class="menu-tag">TestBox</span>
         </div>
         <div class="menu-item">
-          <span class="menu-name">Competitive Programming</span>
+          <span class="menu-name">App Building</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">in training</span>
+          <span class="menu-tag">web · windows · android</span>
         </div>
         <div class="menu-item">
-          <span class="menu-name">Computer Olympiad Prep</span>
+          <span class="menu-name">Math & Physics</span>
           <span class="menu-leader" aria-hidden="true"></span>
-          <span class="menu-tag">in training</span>
+          <span class="menu-tag">konkur track</span>
         </div>
       </div>
       <p class="menu-note">— also brews a decent cup and can do a bit of latte art, off the menu —</p>
     </div>
   </section>
 
-  <section class="interests">
+  <section class="interests" id="interests">
     <div class="reveal">
       <div class="eyebrow">away from the screen</div>
       <div class="cards">
@@ -538,21 +707,51 @@
     </div>
   </section>
 
-  <section class="projects">
+  <section class="projects" id="projects">
     <div class="reveal">
       <div class="eyebrow">projects</div>
-      <div class="empty-box">
-        <p>Nothing shipped here yet — I'm still deep in training.</p>
-        <p>My solved problems and practice code live on GitHub. Check back later, or take a look now.</p>
-        <a class="btn" href="https://github.com/ItsAkhb" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-          View GitHub
-        </a>
-      </div>
+      <article class="project-card">
+        <div class="project-head">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h6M7 13h10M7 17h4"/></svg>
+          </div>
+          <div>
+            <h3 class="project-title">TestBox</h3>
+            <p class="project-sub">offline-first study &amp; test companion — web · windows · android</p>
+          </div>
+        </div>
+        <p class="project-desc">
+          An app I built to manage practice tests: organize exams into folders and subjects, solve sheets with an exam timer or practice stopwatch, track daily study on a calendar, and review marked questions. Everything works offline and syncs when you're back. Built for my own konkur prep — and it shows: I use it every day.
+        </p>
+        <ul class="project-features">
+          <li>Exam mode with negative marking &amp; practice stopwatch</li>
+          <li>Daily reports, streaks &amp; monthly activity calendar (Jalali &amp; Gregorian)</li>
+          <li>Offline-first sync — upload on reconnect, no lost edits</li>
+          <li>Full FA (RTL) &amp; EN, light &amp; dark themes</li>
+        </ul>
+        <div class="project-stack">
+          <span>React 19</span><span>Vite</span><span>Supabase</span><span>Electron</span><span>Capacitor</span>
+        </div>
+        <div class="project-links">
+          <a class="btn" href="https://itsakhb.github.io/TestBox/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+            Live demo
+          </a>
+          <a class="btn" href="https://github.com/ItsAkhb/TestBox" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            Source
+          </a>
+          <a class="btn" href="https://github.com/ItsAkhb/TestBox/releases" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Windows &amp; Android
+          </a>
+        </div>
+      </article>
+      <p class="menu-note" style="margin-top:18px">— more experiments stay in the drawer until they're worth showing —</p>
     </div>
   </section>
 
-  <section class="contact">
+  <section class="contact" id="contact">
     <div class="reveal">
       <div class="eyebrow">connect</div>
       <div class="contact-grid">
@@ -573,7 +772,7 @@
   </section>
 
   <footer>
-    <p>Ali Khatibi · built one problem at a time</p>
+    <p>Ali Khatibi · konkur by day, code for fun</p>
   </footer>
 
 </div>
@@ -589,6 +788,19 @@
   }, { threshold: 0.15 });
 
   document.querySelectorAll('.reveal:not(.in-view)').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.scrollY - 64;
+        window.scrollTo({ top: y, behavior: 'instant' });
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
 </script>
 
 </body>
