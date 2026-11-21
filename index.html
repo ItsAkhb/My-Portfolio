@@ -3,11 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js');</script>
 <title>Ali Khatibi — Konkur Student & Hobbyist Coder</title>
 <meta name="description" content="Ali Khatibi — grade 12 konkur student (math–physics), building small tools like TestBox for fun.">
+<meta name="theme-color" content="#17120e">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://itsakhb.github.io/My-Portfolio/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317120e'/%3E%3Cpath d='M19 46V21l13 25V21' fill='none' stroke='%23cf9556' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='48' cy='20' r='5' fill='%237a9a72'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ali Khatibi">
+<meta property="og:url" content="https://itsakhb.github.io/My-Portfolio/">
+<meta property="og:title" content="Ali Khatibi — Konkur Student & Hobbyist Coder">
+<meta property="og:description" content="Grade 12 konkur student on the math–physics track. Builds small tools like TestBox. Tech death and funeral doom on repeat.">
+<meta property="og:image" content="https://itsakhb.github.io/My-Portfolio/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ali Khatibi — konkur student, coder, metalhead">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ali Khatibi — Konkur Student & Hobbyist Coder">
+<meta name="twitter:description" content="Grade 12 konkur student on the math–physics track. Builds small tools like TestBox. Tech death and funeral doom on repeat.">
+<meta name="twitter:image" content="https://itsakhb.github.io/My-Portfolio/og.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ali Khatibi",
+  "url": "https://itsakhb.github.io/My-Portfolio/",
+  "jobTitle": "Student",
+  "description": "Grade 12 konkur student on the math–physics track, hobbyist coder, and metalhead.",
+  "address": { "@type": "PostalAddress", "addressLocality": "Mashhad", "addressCountry": "IR" },
+  "sameAs": [
+    "https://github.com/ItsAkhb",
+    "https://t.me/ItsAkhb",
+    "https://codeforces.com/profile/Akhb"
+  ],
+  "knowsAbout": ["C++", "Algorithms", "JavaScript", "React", "Tech Death Metal", "Funeral Doom Metal"]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,600&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #17120e;
@@ -25,6 +63,28 @@
   }
 
   *{ box-sizing: border-box; margin:0; padding:0; }
+
+  ::selection{ background: rgba(207,149,86,0.3); color: var(--text); }
+
+  .skip-link{
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 100;
+    transform: translateY(-200%);
+    background: var(--accent);
+    color: #17120e;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+  .skip-link:focus-visible{ transform: translateY(0); outline: 2px solid var(--text); outline-offset: 2px; }
+  html[dir="rtl"] .skip-link{ left: auto; right: 12px; }
+  #main:focus{ outline: none; }
 
   body{
     background: var(--bg);
@@ -160,12 +220,14 @@
   .eyebrow{
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.78rem;
+    font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--accent);
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    width: 100%;
     margin-bottom: 20px;
   }
   .eyebrow::before{
@@ -174,7 +236,21 @@
     height: 1px;
     background: var(--accent);
     display: inline-block;
+    flex: none;
   }
+  .eyebrow::after{
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--surface-border), transparent);
+  }
+  .eyebrow-index{
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    flex: none;
+  }
+  html[dir="rtl"] .eyebrow::after{ background: linear-gradient(270deg, var(--surface-border), transparent); }
 
   h1,h2,h3{ font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.01em; }
 
@@ -187,6 +263,20 @@
     padding-top: 40px;
     padding-bottom: 40px;
     overflow: hidden;
+  }
+
+  .hero::before{
+    content: "";
+    position: absolute;
+    inset: -60px -30px;
+    background-image:
+      linear-gradient(rgba(207,149,86,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207,149,86,0.06) 1px, transparent 1px);
+    background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 48%, #000 15%, transparent 55%);
+    mask-image: radial-gradient(ellipse at 50% 48%, #000 15%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   .hero-glow{
@@ -228,7 +318,7 @@
     transition: stroke 0.3s ease;
   }
   .hero-graph .edge.accent{ stroke: var(--accent-soft); }
-  .hero-graph:hover .edge{
+  .hero:hover .hero-graph .edge{
     stroke: var(--accent-soft);
     animation: dash-in 1.6s ease forwards, marching 1.4s linear infinite;
   }
@@ -242,13 +332,10 @@
     transition: transform 0.25s ease, fill 0.25s ease, stroke 0.25s ease;
     transform-box: fill-box;
     transform-origin: center;
-    cursor: pointer;
   }
   .hero-graph .node.g{ stroke: var(--green); }
-  .hero-graph .node:hover{
-    transform: scale(1.9);
-    fill: var(--accent);
-    stroke: var(--text);
+  .hero:hover .hero-graph .node{
+    transform: scale(1.35);
   }
   @keyframes dash-in{ to{ stroke-dashoffset: 0; } }
   @keyframes node-in{ to{ opacity: 1; } }
@@ -308,12 +395,12 @@
   }
 
   /* ---------- REVEAL ---------- */
-  .reveal{
+  html.js .reveal{
     opacity: 0;
     transform: translateY(22px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .reveal.in-view{ opacity: 1; transform: translateY(0); }
+  html.js .reveal.in-view{ opacity: 1; transform: translateY(0); }
 
   /* ---------- ABOUT ---------- */
   .about p{
@@ -450,6 +537,22 @@
     font-size: 0.82rem;
     color: var(--text-dim);
   }
+  .menu-note--metal{
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--text-muted);
+  }
+  .menu-note--metal::before{
+    content: "";
+    flex: none;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(207,149,86,0.15);
+  }
+  html[dir="rtl"] .menu-note{ padding-left: 0; padding-right: 4px; }
 
   /* ---------- INTERESTS ---------- */
   .cards{
@@ -460,28 +563,105 @@
   }
   @media (max-width: 700px){ .cards{ grid-template-columns: 1fr; } }
   .card{
+    position: relative;
     background: var(--bg-soft);
     border: 1px solid var(--surface-border);
     border-radius: 4px;
     padding: 28px 22px;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
   }
-  .card:hover{ border-color: var(--accent-soft); transform: translateY(-3px); }
+  .card::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 80% at 50% 0%, rgba(207,149,86,0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .card:hover{
+    border-color: var(--accent-soft);
+    transform: translateY(-3px);
+    background: var(--surface);
+  }
+  .card:hover::after{ opacity: 1; }
   .card .icon{ font-size: 1.4rem; margin-bottom: 14px; display: block; }
   .card h3{ font-size: 1.05rem; margin-bottom: 8px; color: var(--text); }
   .card p{ font-size: 0.92rem; color: var(--text-muted); }
+  .card--metal{ border-color: rgba(207,149,86,0.22); }
+  .card--metal:hover{ border-color: var(--accent); }
+
+  .wave{
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 26px;
+    margin-bottom: 14px;
+  }
+  .wave i{
+    flex: 1;
+    height: calc(var(--h, 0.5) * 100%);
+    background: linear-gradient(180deg, var(--accent), var(--accent-soft));
+    border-radius: 1px;
+    transform-origin: bottom;
+    opacity: 0.85;
+    animation: wave 3.4s ease-in-out infinite;
+  }
+  .wave i:nth-child(2n){ animation-delay: 0.45s; }
+  .wave i:nth-child(3n){ animation-duration: 2.6s; }
+  .wave i:nth-child(4n){ animation-delay: 0.9s; }
+  .card--metal:hover .wave i{ animation-duration: 1.1s; }
+  @keyframes wave{
+    0%, 100%{ transform: scaleY(0.5); }
+    50%{ transform: scaleY(1); }
+  }
+
+  .card-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .card-tags span{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--surface-border);
+    border-radius: 2px;
+    padding: 3px 7px;
+    background: rgba(207,149,86,0.05);
+  }
+  html[dir="rtl"] .card-tags span{ letter-spacing: 0; text-transform: none; }
 
   /* ---------- PROJECTS (TestBox) ---------- */
   .project-card{
+    position: relative;
+    overflow: hidden;
     background: var(--surface);
     border: 1px solid var(--surface-border);
     border-radius: 4px;
     padding: 36px 32px;
     max-width: 640px;
     box-shadow: 0 20px 40px var(--shadow);
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.35s ease;
   }
-  .project-card:hover{ border-color: var(--accent-soft); }
+  .project-card::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 34%, rgba(207,149,86,0.09) 50%, transparent 66%);
+    transform: translateX(-110%);
+    transition: transform 0.9s ease;
+  }
+  .project-card:hover::before{ transform: translateX(110%); }
+  .project-card:hover{
+    border-color: var(--accent-soft);
+    box-shadow: 0 26px 50px var(--shadow);
+  }
   .project-head{
     display: flex;
     align-items: center;
@@ -576,7 +756,12 @@
     transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
     background: var(--bg-soft);
   }
-  .btn:hover{ border-color: var(--accent); background: var(--surface); transform: translateY(-2px); }
+  .btn:hover{
+    border-color: var(--accent);
+    background: var(--surface);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -18px rgba(0,0,0,0.95);
+  }
   .btn svg{ width: 18px; height: 18px; flex-shrink: 0; }
   .btn:focus-visible, a:focus-visible, button:focus-visible{
     outline: 2px solid var(--accent);
@@ -619,16 +804,17 @@
     border-radius: 3px;
     padding: 5px 10px;
     cursor: pointer;
-    transition: border-color 0.25s ease, background 0.25s ease;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.15s ease;
     flex-shrink: 0;
   }
   .lang-btn:hover{ border-color: var(--accent); background: rgba(207,149,86,0.07); }
 
-  /* ---------- SMOOTH NAV SCROLL FALLBACK ---------- */
-  html.nav-anim{ scroll-behavior: smooth; }
-
   /* ---------- HERO TYPING / CARET ---------- */
   .hero-meta div{ white-space: nowrap; }
+  @media (max-width: 480px){
+    .hero-meta{ font-size: 0.78rem; gap: 18px; }
+    .hero-meta div{ white-space: normal; }
+  }
   .hero-meta .type-caret{
     display: inline-block;
     width: 7px;
@@ -642,29 +828,29 @@
   @keyframes caret-blink{ 0%, 49%{ opacity: 1; } 50%, 100%{ opacity: 0; } }
 
   /* ---------- STAGGERED REVEALS ---------- */
-  .cards .card{
+  html.js .cards .card{
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.8, 0.3, 1), border-color 0.3s ease;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.8, 0.3, 1), border-color 0.3s ease, background 0.3s ease;
   }
-  .cards.in-view .card{ opacity: 1; transform: translateY(0); }
-  .cards.in-view .card:nth-child(1){ transition-delay: 0s; }
-  .cards.in-view .card:nth-child(2){ transition-delay: 0.12s; }
-  .cards.in-view .card:nth-child(3){ transition-delay: 0.24s; }
+  html.js .cards.in-view .card{ opacity: 1; transform: translateY(0); }
+  html.js .cards.in-view .card:nth-child(1){ transition-delay: 0s; }
+  html.js .cards.in-view .card:nth-child(2){ transition-delay: 0.12s; }
+  html.js .cards.in-view .card:nth-child(3){ transition-delay: 0.24s; }
 
-  .menu-card{
+  html.js .menu-card{
     opacity: 0;
     transform: translateY(28px) rotate(-0.4deg);
     transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.8, 0.3, 1), border-color 0.3s ease;
   }
-  .menu-card.in-view{ opacity: 1; transform: translateY(0) rotate(0); }
+  html.js .menu-card.in-view{ opacity: 1; transform: translateY(0) rotate(0); }
 
-  .project-card{
+  html.js .project-card{
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.8, 0.3, 1), border-color 0.3s ease;
   }
-  .project-card.in-view{ opacity: 1; transform: translateY(0); }
+  html.js .project-card.in-view{ opacity: 1; transform: translateY(0); }
 
   /* ---------- MICRO ANIMATIONS ---------- */
   .project-icon{
@@ -679,13 +865,13 @@
   }
   .seg-tree.in-view .st-node{ animation: node-float 4s ease-in-out infinite; }
   .seg-tree.in-view .st-node:nth-child(odd){ animation-delay: 0.6s; }
+  .seg-tree.in-view .st-node:hover{ animation: none; transform: scale(1.5); fill: var(--accent); }
   @keyframes node-float{
     0%, 100%{ transform: translateY(0); }
     50%{ transform: translateY(-2px); }
   }
   .lang-btn:active{ transform: scale(0.92); }
-  .lang-btn{ transition: border-color 0.25s ease, background 0.25s ease, transform 0.15s ease; }
-  #langFade{ animation: lang-fade 0.45s ease; }
+  .lang-fade{ animation: lang-fade 0.45s ease; }
   @keyframes lang-fade{
     from{ opacity: 0.35; }
     to{ opacity: 1; }
@@ -695,6 +881,8 @@
     .hero-meta .type-caret{ animation: none; }
     .cards .card, .menu-card, .project-card{ opacity: 1; transform: none; transition: none; }
     .seg-tree .st-node{ animation: none !important; }
+    .wave i{ animation: none !important; }
+    .project-card::before{ display: none; }
   }
 
   /* ---------- PERSIAN / RTL ---------- */
@@ -718,7 +906,6 @@
   }
   html[lang="fa"] .eyebrow{ text-transform: none; }
   html[lang="fa"] .eyebrow::before{ display: none; }
-  html[lang="fa"] [dir="rtl"] .menu-item{ direction: rtl; }
   html[dir="rtl"] .hero-graph{ right: auto; left: -40px; }
   html[dir="rtl"] .menu-note,
   html[dir="rtl"] .hero-tagline,
@@ -743,11 +930,564 @@
     font-family: 'JetBrains Mono', monospace;
     letter-spacing: 0.06em;
   }
+
+  /* ============================================================
+     VISUAL LAYER V2
+     ============================================================ */
+
+  /* ---------- hero atmosphere ---------- */
+  .hero-aurora{
+    position: absolute;
+    inset: -12% -8%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(52px);
+    opacity: 0.85;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 48%, #000 15%, transparent 52%);
+    mask-image: radial-gradient(ellipse at 50% 48%, #000 15%, transparent 52%);
+  }
+  .hero-aurora i{
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    animation: aurora-drift 24s ease-in-out infinite alternate;
+  }
+  .hero-aurora i:nth-child(1){
+    width: 46vmax; height: 46vmax;
+    left: -14%; top: -16%;
+    background: radial-gradient(circle, rgba(207,149,86,0.22), transparent 66%);
+  }
+  .hero-aurora i:nth-child(2){
+    width: 36vmax; height: 36vmax;
+    right: -8%; top: 6%;
+    background: radial-gradient(circle, rgba(122,154,114,0.17), transparent 66%);
+    animation-duration: 31s;
+    animation-delay: -7s;
+  }
+  .hero-aurora i:nth-child(3){
+    width: 30vmax; height: 30vmax;
+    left: 34%; bottom: -20%;
+    background: radial-gradient(circle, rgba(207,149,86,0.15), transparent 70%);
+    animation-duration: 38s;
+    animation-delay: -15s;
+  }
+  @keyframes aurora-drift{
+    from{ transform: translate3d(0, 0, 0) scale(1); }
+    to{ transform: translate3d(5%, 7%, 0) scale(1.14); }
+  }
+
+  .hero-grain{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 48%, #000 15%, transparent 55%);
+    mask-image: radial-gradient(ellipse at 50% 48%, #000 15%, transparent 55%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+    background-size: 140px 140px;
+  }
+
+  .hero-spot{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    background: radial-gradient(
+      340px circle at var(--mx, 50%) var(--my, 38%),
+      rgba(207,149,86,0.13),
+      transparent 70%
+    );
+  }
+  .hero:hover .hero-spot{ opacity: 1; }
+
+  .hero-graph .pulse{
+    fill: var(--accent);
+    filter: drop-shadow(0 0 6px rgba(207,149,86,0.95));
+  }
+
+  /* ---------- hero name reveal ---------- */
+  .hero-name .word{
+    display: inline-block;
+    vertical-align: top;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .hero-name .word{
+      overflow: hidden;
+      padding-bottom: 0.16em;
+      margin-bottom: -0.16em;
+    }
+    .hero-name .word > span{
+      display: inline-block;
+      transform: translateY(115%);
+      background-image: linear-gradient(100deg, var(--text) 0%, var(--text) 40%, #fff4e2 50%, var(--text) 60%, var(--text) 100%);
+      background-size: 280% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation:
+        word-up 0.95s cubic-bezier(0.19, 1, 0.22, 1) forwards,
+        name-sheen 7.5s ease-in-out infinite;
+      animation-delay:
+        calc(var(--i, 0) * 0.09s + 0.1s),
+        calc(var(--i, 0) * 0.25s + 1.5s);
+    }
+    .hero-name em .word > span{
+      background-image: linear-gradient(100deg, var(--accent) 0%, var(--accent) 40%, #ffe8c4 50%, var(--accent) 60%, var(--accent) 100%);
+    }
+    html[lang="fa"] .hero-name em{
+      display: inline-block;
+      transform: translateY(115%);
+      padding-bottom: 0.16em;
+      margin-bottom: -0.16em;
+      animation: word-up 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.15s forwards;
+    }
+    @keyframes word-up{ to{ transform: translateY(0); } }
+    @keyframes name-sheen{
+      0%, 55%{ background-position: 150% 0; }
+      85%, 100%{ background-position: -60% 0; }
+    }
+  }
+
+  /* ---------- nav sliding pill ---------- */
+  .nav-links{ position: relative; }
+  .nav-links a{ position: relative; z-index: 1; }
+  .nav-pill{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 30px;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    background: rgba(207,149,86,0.10);
+    border: 1px solid rgba(207,149,86,0.20);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    transition:
+      left 0.38s cubic-bezier(0.22, 0.8, 0.3, 1),
+      width 0.38s cubic-bezier(0.22, 0.8, 0.3, 1),
+      opacity 0.25s ease;
+  }
+  .nav-links a:hover{ background: transparent; }
+
+  /* ---------- desktop section rail ---------- */
+  .rail{
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-end;
+  }
+  .rail a{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .rail i{
+    width: 7px;
+    height: 7px;
+    flex: none;
+    border-radius: 50%;
+    border: 1px solid var(--text-dim);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .rail span{
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+  }
+  .rail a:hover, .rail a.active{ color: var(--accent); }
+  .rail a:hover span, .rail a.active span{ opacity: 1; transform: translateX(0); }
+  .rail a.active i{
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.25);
+    box-shadow: 0 0 10px rgba(207,149,86,0.75);
+  }
+  @media (max-width: 1200px){ .rail{ display: none; } }
+
+  /* ---------- giant section numerals ---------- */
+  .section-ghost{
+    position: absolute;
+    top: 6px;
+    right: -6px;
+    z-index: 0;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(4.5rem, 13vw, 8rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(207,149,86,0.11);
+    pointer-events: none;
+    user-select: none;
+  }
+  @supports (animation-timeline: view()){
+    @media (prefers-reduced-motion: no-preference){
+      .section-ghost{
+        animation: ghost-drift linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 100%;
+      }
+    }
+  }
+  @keyframes ghost-drift{
+    from{ transform: translateY(46px); }
+    to{ transform: translateY(-46px); }
+  }
+
+  /* ---------- menu: marching dotted leaders ---------- */
+  .menu-item .menu-leader{
+    border-bottom: 0;
+    height: 0.6em;
+    background-image: radial-gradient(circle, var(--text-dim) 1px, transparent 1.4px);
+    background-size: 9px 2px;
+    background-repeat: repeat-x;
+    background-position: 0 100%;
+    opacity: 0.45;
+    transition: opacity 0.25s ease;
+  }
+  .menu-item:hover .menu-leader{
+    background-image: radial-gradient(circle, var(--accent) 1px, transparent 1.4px);
+    opacity: 1;
+    animation: leader-march 0.9s linear infinite;
+  }
+  @keyframes leader-march{ to{ background-position: 9px 100%; } }
+  html[dir="rtl"] .menu-item:hover .menu-leader{ animation-name: leader-march-rtl; }
+  @keyframes leader-march-rtl{ to{ background-position: -9px 100%; } }
+
+  .menu-card{ position: relative; }
+  .menu-card::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      260px circle at var(--px, 50%) var(--py, 0%),
+      rgba(207,149,86,0.10),
+      transparent 62%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .menu-card:hover::before{ opacity: 1; }
+
+  /* ---------- metal player ---------- */
+  .player{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .vinyl{
+    position: relative;
+    width: 54px;
+    height: 54px;
+    flex: none;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%, var(--bg) 0 17%, transparent 18%),
+      repeating-radial-gradient(circle at 50% 50%, rgba(207,149,86,0.22) 0 1px, transparent 1px 4px),
+      conic-gradient(from 0deg, #2a2018, #3b2d1f, #241c15, #3b2d1f, #2a2018);
+    box-shadow: 0 0 0 1px rgba(207,149,86,0.25), 0 10px 22px rgba(0,0,0,0.55);
+    animation: spin 9s linear infinite;
+  }
+  .vinyl::after{
+    content: "";
+    position: absolute;
+    inset: 41%;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.9;
+  }
+  .card--metal:hover .vinyl{ animation-duration: 1.3s; }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  .player-state{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .player-state::before{
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: dot-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes dot-pulse{
+    0%, 100%{ opacity: 1; box-shadow: 0 0 0 0 rgba(122,154,114,0.5); }
+    50%{ opacity: 0.55; box-shadow: 0 0 0 4px rgba(122,154,114,0); }
+  }
+  .player h3{ margin-bottom: 6px; }
+  html[dir="rtl"] .player-state{ letter-spacing: 0; text-transform: none; }
+
+  /* ---------- TestBox app preview ---------- */
+  .app-preview{
+    direction: ltr;
+    margin-bottom: 22px;
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 18px 36px -24px rgba(0,0,0,0.9);
+  }
+  .app-bar{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--surface-border);
+  }
+  .app-dots{ display: flex; gap: 5px; }
+  .app-dots i{ width: 7px; height: 7px; border-radius: 50%; background: var(--surface-border); }
+  .app-dots i:nth-child(1){ background: #a4553f; }
+  .app-dots i:nth-child(2){ background: #a88a4a; }
+  .app-dots i:nth-child(3){ background: var(--green); }
+  .app-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .app-chip{
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    border: 1px solid rgba(122,154,114,0.35);
+    border-radius: 2px;
+    padding: 2px 6px;
+  }
+  .app-body{ display: flex; min-height: 148px; }
+  .app-rail{
+    width: 38px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-right: 1px solid var(--surface-border);
+    background: rgba(255,255,255,0.012);
+  }
+  .app-rail span{
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: var(--surface-border);
+    opacity: 0.6;
+  }
+  .app-rail span.on{ background: var(--accent); opacity: 0.85; }
+  .app-main{ flex: 1; padding: 14px; min-width: 0; }
+  .app-row{ display: flex; gap: 12px; align-items: flex-start; }
+  .app-timer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    border: 1px solid var(--surface-border);
+    border-radius: 4px;
+    background: var(--bg-soft);
+  }
+  .app-time{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+  }
+  .project-card:hover .app-time{ color: #ffe6c0; text-shadow: 0 0 14px rgba(207,149,86,0.55); }
+  .app-timer-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .app-cal{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    width: 96px;
+    flex: none;
+    align-content: start;
+    padding-top: 4px;
+  }
+  .app-cal i{ aspect-ratio: 1; border-radius: 1px; background: var(--surface-border); opacity: 0.5; }
+  .app-cal i.on{ background: var(--accent); opacity: 0.85; }
+  .app-bars{
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 34px;
+    margin-top: 16px;
+  }
+  .app-bars span{
+    flex: 1;
+    height: calc(var(--h, 0.5) * 100%);
+    border-radius: 1px;
+    background: linear-gradient(180deg, var(--accent-soft), transparent);
+    transform-origin: bottom;
+    animation: wave 4.5s ease-in-out infinite;
+    animation-delay: calc(var(--d, 0) * 0.18s);
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee{
+    position: relative;
+    overflow: hidden;
+    padding: 20px 0;
+    margin-top: 8px;
+    border-top: 1px solid var(--surface-border);
+    border-bottom: 1px solid var(--surface-border);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  }
+  .marquee-track{
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee:hover .marquee-track{ animation-play-state: paused; }
+  .marquee span{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.45rem;
+    line-height: 1;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .marquee i{
+    font-style: normal;
+    font-size: 0.6rem;
+    color: var(--accent);
+    opacity: 0.8;
+  }
+  @keyframes marquee{ to{ transform: translateX(-50%); } }
+  @keyframes marquee-rtl{ to{ transform: translateX(50%); } }
+  html[dir="rtl"] .marquee-track{ animation-name: marquee-rtl; }
+  html[lang="fa"] .marquee span{ font-family: 'Vazirmatn', sans-serif; font-style: normal; font-weight: 700; }
+
+  /* ---------- footer wordmark ---------- */
+  .footer-mark{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 10vw, 5.4rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(207,149,86,0.22);
+    margin-bottom: 20px;
+    user-select: none;
+    transition: color 0.5s ease, -webkit-text-stroke-color 0.5s ease, letter-spacing 0.5s ease;
+  }
+  .footer-mark:hover{
+    color: rgba(207,149,86,0.13);
+    -webkit-text-stroke-color: rgba(207,149,86,0.55);
+    letter-spacing: 0.01em;
+  }
+  html[lang="fa"] .footer-mark{
+    font-family: 'Vazirmatn', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0;
+  }
+
+  /* ---------- tilt / magnet transitions ---------- */
+  .card.tilt-ready,
+  html.js .cards .card.tilt-ready{
+    transition: transform 0.14s ease-out, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+  html.js .project-card.tilt-ready{
+    transition: transform 0.14s ease-out, border-color 0.3s ease, box-shadow 0.35s ease;
+  }
+  .btn.magnetic{
+    transition: transform 0.12s ease-out, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  /* ---------- language view transition ---------- */
+  ::view-transition-old(root),
+  ::view-transition-new(root){
+    animation-duration: 0.38s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ---------- v2 RTL ---------- */
+  html[lang="fa"] .hero-name{
+    font-family: 'Vazirmatn', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.3rem, 7.2vw, 4.7rem);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+  html[lang="fa"] .hero-name em{
+    font-style: normal;
+  }
+  html[dir="rtl"] .section-ghost{
+    right: auto;
+    left: -6px;
+    font-family: 'Vazirmatn', sans-serif;
+  }
+  html[dir="rtl"] .rail{
+    right: auto;
+    left: 24px;
+    align-items: flex-start;
+  }
+  html[dir="rtl"] .rail span{ transform: translateX(-8px); }
+  html[dir="rtl"] .rail a:hover span,
+  html[dir="rtl"] .rail a.active span{ transform: translateX(0); }
+
+  /* ---------- v2 reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    .hero-aurora i,
+    .vinyl,
+    .marquee-track,
+    .app-bars span,
+    .player-state::before{ animation: none !important; }
+    .hero-spot{ display: none; }
+    .section-ghost{ animation: none !important; }
+    .footer-mark{ transition: none; }
+  }
 </style>
 </head>
 <body>
 
-<nav class="topnav">
+<a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+<nav class="topnav" aria-label="Primary">
   <div class="topnav-inner">
     <a class="nav-brand" href="#top">Ali<em>.</em>Khatibi</a>
     <div class="nav-links">
@@ -755,16 +1495,30 @@
       <a href="#interests" data-i18n="nav-interests">Interests</a>
       <a href="#projects" data-i18n="nav-projects">Projects</a>
       <a href="#contact" data-i18n="nav-contact">Contact</a>
-      <button class="lang-btn" id="langToggle" type="button" aria-label="Switch language">FA</button>
+      <button class="lang-btn" id="langToggle" type="button" aria-label="Switch to Persian">FA</button>
+      <div class="nav-pill" aria-hidden="true"></div>
     </div>
   </div>
   <div class="scroll-progress" aria-hidden="true"></div>
 </nav>
 
+<aside class="rail">
+  <a href="#about"><i aria-hidden="true"></i><span data-i18n="rail-about">about</span></a>
+  <a href="#skills"><i aria-hidden="true"></i><span data-i18n="rail-skills">menu</span></a>
+  <a href="#interests"><i aria-hidden="true"></i><span data-i18n="rail-interests">interests</span></a>
+  <a href="#projects"><i aria-hidden="true"></i><span data-i18n="rail-projects">projects</span></a>
+  <a href="#contact"><i aria-hidden="true"></i><span data-i18n="rail-contact">contact</span></a>
+</aside>
+
 <div class="wrap" id="top">
 
-  <section class="hero">
+  <main id="main" tabindex="-1">
+
+  <section class="hero" aria-label="Intro">
     <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-spot" aria-hidden="true"></div>
     <svg class="hero-graph" viewBox="0 0 300 300" aria-hidden="true">
       <line class="edge" x1="60" y1="50" x2="150" y2="30" style="animation-delay:.1s"/>
       <line class="edge" x1="150" y1="30" x2="230" y2="80" style="animation-delay:.2s"/>
@@ -787,28 +1541,35 @@
     </svg>
     <div class="reveal in-view">
       <div class="eyebrow" data-i18n="hero-eyebrow">grade 12 · konkur math–physics · occasional builder</div>
-      <h1 class="hero-name">Ali <em>Khatibi</em></h1>
+      <h1 class="hero-name" data-i18n-html="hero-name">
+        <span class="word" style="--i:0"><span>Ali</span></span>
+        <span class="word" style="--i:1"><em><span>Khatibi</span></em></span>
+      </h1>
       <p class="hero-tagline" data-i18n-html="hero-tagline">Konkur student by day, hobbyist coder after hours. I build small tools for the fun of it — most recently <a href="#projects" class="inline-link">TestBox</a> — and I'm spending this year on the math–physics track.</p>
       <div class="hero-meta">
         <div><span>&gt;</span> <span data-i18n="hero-meta-1">konkur candidate</span></div>
         <div><span>&gt;</span> <span data-i18n="hero-meta-2">built TestBox</span></div>
         <div><span>&gt;</span> <span data-i18n="hero-meta-3">Mashhad, Iran</span></div>
+        <div><span>&gt;</span> <span data-i18n="hero-meta-4">metalhead — tech death · funeral doom</span></div>
       </div>
       <div class="scroll-cue"><span class="line" aria-hidden="true"></span> <span data-i18n="hero-scroll">scroll</span></div>
     </div>
   </section>
 
-  <section class="about" id="about">
+  <section class="about" id="about" aria-labelledby="about-h">
+    <span class="section-ghost" aria-hidden="true" data-i18n="index-1">01</span>
     <div class="reveal">
-      <div class="eyebrow" data-i18n="about-eyebrow">about</div>
+      <h2 class="eyebrow" id="about-h"><span class="eyebrow-index" aria-hidden="true">01</span><span data-i18n="about-eyebrow">about</span></h2>
       <p data-i18n-html="about-p1">I'm a 12th grader at <strong>Hasheminejad High School</strong> in Mashhad, spending this year preparing for the <strong>konkur</strong> on the math–physics track. Before that, I spent a few good years deep in C++ and algorithms as a <strong>Computer Olympiad</strong> trainee — including competing in Round 2 of the national olympiad, where my run ended.</p>
       <p data-i18n-html="about-p2">The olympiad taught me how to think; programming is how I relax. I still write code for the fun of it — small tools built to learn something new, like <strong>TestBox</strong>, an offline-first study app I actually use myself. Off the screen: volleyball court, good playlists, and a never-ending debate over what to order at the café.</p>
+      <p data-i18n-html="about-p3">The playlists run heavy. I'm a metalhead, mostly <strong>tech death</strong> for its precision and density and <strong>funeral doom</strong> for its patience — two ends of the same instinct that pulled me into algorithms: build something with structure, then let it breathe.</p>
     </div>
   </section>
 
-  <section class="skills">
+  <section class="skills" id="skills" aria-labelledby="skills-h">
+    <span class="section-ghost" aria-hidden="true" data-i18n="index-2">02</span>
     <div class="reveal">
-      <div class="eyebrow" data-i18n="skills-eyebrow">the menu</div>
+      <h2 class="eyebrow" id="skills-h"><span class="eyebrow-index" aria-hidden="true">02</span><span data-i18n="skills-eyebrow">the menu</span></h2>
       <div class="menu-card">
         <svg class="seg-tree" viewBox="0 0 220 92" aria-hidden="true">
           <line class="st-edge" x1="110" y1="10" x2="55" y2="40"/>
@@ -863,25 +1624,39 @@
         </div>
       </div>
       <p class="menu-note" data-i18n="menu-note">— also brews a decent cup and can do a bit of latte art, off the menu —</p>
+      <p class="menu-note menu-note--metal" data-i18n="menu-note-2">— off the menu: tech death · funeral doom, always on —</p>
     </div>
   </section>
 
-  <section class="interests" id="interests">
+  <section class="interests" id="interests" aria-labelledby="interests-h">
+    <span class="section-ghost" aria-hidden="true" data-i18n="index-3">03</span>
     <div class="reveal">
-      <div class="eyebrow" data-i18n="int-eyebrow">away from the screen</div>
+      <h2 class="eyebrow" id="interests-h"><span class="eyebrow-index" aria-hidden="true">03</span><span data-i18n="int-eyebrow">away from the screen</span></h2>
       <div class="cards">
-        <div class="card">
-          <span class="icon">🏐</span>
+        <div class="card tilt-ready">
+          <span class="icon" aria-hidden="true">🏐</span>
           <h3 data-i18n="int-1">Volleyball</h3>
           <p data-i18n="int-1p">On the court more often than not.</p>
         </div>
-        <div class="card">
-          <span class="icon">🎧</span>
-          <h3 data-i18n="int-2">Music</h3>
-          <p data-i18n="int-2p">There's usually something playing in the background.</p>
+        <div class="card card--metal tilt-ready">
+          <div class="player">
+            <div class="vinyl" aria-hidden="true"></div>
+            <div class="player-state" data-i18n="player-state">now spinning · funeral doom</div>
+          </div>
+          <div class="wave" aria-hidden="true">
+            <i style="--h:.35"></i><i style="--h:.7"></i><i style="--h:.5"></i><i style="--h:1"></i>
+            <i style="--h:.45"></i><i style="--h:.85"></i><i style="--h:.3"></i><i style="--h:.65"></i>
+            <i style="--h:.9"></i><i style="--h:.4"></i><i style="--h:.75"></i><i style="--h:.55"></i>
+          </div>
+          <h3 data-i18n="int-2">Metal</h3>
+          <p data-i18n="int-2p">Tech death for the precision, funeral doom for the patience.</p>
+          <div class="card-tags">
+            <span data-i18n="metal-tag-1">tech death</span>
+            <span data-i18n="metal-tag-2">funeral doom</span>
+          </div>
         </div>
-        <div class="card">
-          <span class="icon">☕</span>
+        <div class="card tilt-ready">
+          <span class="icon" aria-hidden="true">☕</span>
           <h3 data-i18n="int-3">Cafés</h3>
           <p data-i18n="int-3p">Unofficial expert in cozy corners and good coffee.</p>
         </div>
@@ -889,10 +1664,11 @@
     </div>
   </section>
 
-  <section class="projects" id="projects">
+  <section class="projects" id="projects" aria-labelledby="projects-h">
+    <span class="section-ghost" aria-hidden="true" data-i18n="index-4">04</span>
     <div class="reveal">
-      <div class="eyebrow" data-i18n="proj-eyebrow">projects</div>
-      <article class="project-card">
+      <h2 class="eyebrow" id="projects-h"><span class="eyebrow-index" aria-hidden="true">04</span><span data-i18n="proj-eyebrow">projects</span></h2>
+      <article class="project-card tilt-ready">
         <div class="project-head">
           <div class="project-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h6M7 13h10M7 17h4"/></svg>
@@ -900,6 +1676,45 @@
           <div>
             <h3 class="project-title">TestBox</h3>
             <p class="project-sub" data-i18n="proj-sub">offline-first study &amp; test companion — web · windows · android</p>
+          </div>
+        </div>
+        <div class="app-preview">
+          <div class="app-bar">
+            <div class="app-dots"><i></i><i></i><i></i></div>
+            <div class="app-title" data-i18n="app-title">TestBox · study session</div>
+            <span class="app-chip" data-i18n="app-chip">v1.0.0 · offline</span>
+          </div>
+          <div class="app-body">
+            <div class="app-rail">
+              <span class="on" aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </div>
+            <div class="app-main">
+              <div class="app-row">
+                <div class="app-timer">
+                  <div class="app-time" id="appTime">24:17</div>
+                  <div class="app-timer-label" data-i18n="app-timer">exam mode · stopwatch</div>
+                </div>
+                <div class="app-cal" aria-hidden="true">
+                  <i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i>
+                  <i></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i><i></i>
+                  <i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i>
+                  <i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i>
+                </div>
+              </div>
+              <div class="app-bars">
+                <span style="--h:.55; --d:0"></span>
+                <span style="--h:.8; --d:1"></span>
+                <span style="--h:.4; --d:2"></span>
+                <span style="--h:.9; --d:3"></span>
+                <span style="--h:.6; --d:4"></span>
+                <span style="--h:.3; --d:5"></span>
+                <span style="--h:.85; --d:6"></span>
+                <span style="--h:.5; --d:7"></span>
+              </div>
+            </div>
           </div>
         </div>
         <p class="project-desc" data-i18n="proj-desc">
@@ -933,16 +1748,34 @@
     </div>
   </section>
 
-  <section class="contact" id="contact">
+  <div class="marquee">
+    <div class="marquee-track">
+      <span data-i18n="marquee-1">konkur</span><i>·</i>
+      <span data-i18n="marquee-2">C++</span><i>·</i>
+      <span data-i18n="marquee-3">tech death</span><i>·</i>
+      <span data-i18n="marquee-4">funeral doom</span><i>·</i>
+      <span data-i18n="marquee-5">Mashhad</span><i>·</i>
+      <span data-i18n="marquee-6">TestBox</span><i>·</i>
+      <span data-i18n="marquee-1">konkur</span><i>·</i>
+      <span data-i18n="marquee-2">C++</span><i>·</i>
+      <span data-i18n="marquee-3">tech death</span><i>·</i>
+      <span data-i18n="marquee-4">funeral doom</span><i>·</i>
+      <span data-i18n="marquee-5">Mashhad</span><i>·</i>
+      <span data-i18n="marquee-6">TestBox</span><i>·</i>
+    </div>
+  </div>
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <span class="section-ghost" aria-hidden="true" data-i18n="index-5">05</span>
     <div class="reveal">
-      <div class="eyebrow" data-i18n="con-eyebrow">connect</div>
+      <h2 class="eyebrow" id="contact-h"><span class="eyebrow-index" aria-hidden="true">05</span><span data-i18n="con-eyebrow">connect</span></h2>
       <div class="contact-grid">
         <a class="btn" href="https://github.com/ItsAkhb" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.53 10.53 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
           GitHub
         </a>
         <a class="btn" href="https://codeforces.com/profile/Akhb" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.5 4.5h4.1v10.9h6.8v4.1H4.5V4.5Z"/><path d="M17.4 4.5h2.1c.55 0 1 .45 1 1v9.9c0 .55-.45 1-1 1h-2.1c-.55 0-1-.45-1-1V5.5c0-.55.45-1 1-1Z" opacity="0.85"/><path d="M21.9 4.5H24v0c0-.28-.22-.5-.5-.5h-1.6v.5Z" opacity="0"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.6 9.4h3.1v9.2H4.6z"/><path d="M10.4 5.4h3.1v13.2h-3.1z"/><path d="M16.2 11.6h3.1v7H16.2z"/></svg>
           Codeforces
         </a>
         <a class="btn" href="https://t.me/ItsAkhb" target="_blank" rel="noopener">
@@ -957,29 +1790,31 @@
     </div>
   </section>
 
+  </main>
+
   <footer>
-    <p data-i18n="footer">Ali Khatibi · konkur by day, code for fun</p>
+    <h2 class="footer-mark" aria-hidden="true" data-i18n="footer-mark">ALI KHATIBI</h2>
+    <p data-i18n="footer">Ali Khatibi · konkur by day, code for fun, doom by night</p>
   </footer>
 
 </div>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- reveal on scroll ---------- */
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
+        revealObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
 
-  document.querySelectorAll('.reveal:not(.in-view)').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal:not(.in-view)').forEach(el => revealObserver.observe(el));
 
-  // reveal menu/project/cards containers for staggered entry
-  ['.menu-card', '.project-card', '.cards', '.seg-tree'].forEach(sel => {
-    const el = document.querySelector(sel);
-    if (el) el.classList.add('i18n-observe');
-  });
+  /* ---------- staggered card reveals ---------- */
   const staggerObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -990,8 +1825,7 @@
   }, { threshold: 0.2 });
   document.querySelectorAll('.menu-card, .project-card, .cards, .seg-tree').forEach(el => staggerObserver.observe(el));
 
-  // ---------- smooth scroll with easing (never hangs) ----------
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------- smooth scroll with easing ---------- */
   let scrollAnimId = null;
   function animateScrollTo(targetY, duration) {
     if (scrollAnimId) cancelAnimationFrame(scrollAnimId);
@@ -1011,85 +1845,158 @@
     scrollAnimId = requestAnimationFrame(step);
   }
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const id = a.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
-      if (target) {
-        e.preventDefault();
-        const y = target.getBoundingClientRect().top + window.scrollY - 64;
-        animateScrollTo(y);
-        history.replaceState(null, '', '#' + id);
-      }
-    });
+  const topnav = document.querySelector('.topnav');
+  const navHeight = () => (topnav ? topnav.offsetHeight : 0);
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const hash = a.getAttribute('href');
+    if (hash.length < 2) return;
+    const target = document.getElementById(hash.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    animateScrollTo(target.getBoundingClientRect().top + window.scrollY - navHeight() + 1);
+    if (target.hasAttribute('tabindex')) target.focus({ preventScroll: true });
+    history.replaceState(null, '', hash);
   });
 
-  // ---------- scrollspy + progress bar ----------
+  /* ---------- scrollspy + progress bar ---------- */
   const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
-  const sections = navLinks
-    .map(a => document.getElementById(a.getAttribute('href').slice(1)))
-    .filter(Boolean);
+  // Include every main section so the sidebar-only Menu section is tracked too.
+  const sections = [...document.querySelectorAll('main section[id]')];
   const progressBar = document.querySelector('.scroll-progress');
   let spyTicking = false;
   function onScroll() {
-    if (!spyTicking) {
-      requestAnimationFrame(() => {
-        // progress
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const p = max > 0 ? window.scrollY / max : 0;
-        if (progressBar) progressBar.style.transform = 'scaleX(' + p + ')';
-        // spy
-        const probe = window.scrollY + 90;
-        let current = null;
-        for (const s of sections) {
-          if (s.offsetTop <= probe) current = s.id;
-        }
-        navLinks.forEach(a => a.classList.toggle('active', current === a.getAttribute('href').slice(1)));
-        spyTicking = false;
-      });
-      spyTicking = true;
-    }
+    if (spyTicking) return;
+    spyTicking = true;
+    requestAnimationFrame(() => {
+      // progress
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? window.scrollY / max : 0;
+      if (progressBar) progressBar.style.transform = 'scaleX(' + p + ')';
+      // spy
+      const probe = navHeight() + 24;
+      let current = null;
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= probe) current = s.id;
+      }
+      if (max > 0 && window.scrollY >= max - 2) current = sections[sections.length - 1].id;
+      navLinks.forEach(a => a.classList.toggle('active', current === a.getAttribute('href').slice(1)));
+      railLinks.forEach(a => a.classList.toggle('active', current === a.getAttribute('href').slice(1)));
+      const activeNav = document.querySelector('.nav-links a.active');
+      if (pill) {
+        if (activeNav) movePill(activeNav);
+        else pill.style.opacity = '0';
+      }
+      spyTicking = false;
+    });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
-  // ---------- hero typing effect ----------
-  const heroMetaSpans = document.querySelectorAll('.hero-meta [data-i18n]');
-  heroMetaSpans.forEach((span, idx) => {
-    const finalText = () => I18N[currentLang][span.dataset.i18n];
-    span.textContent = '';
-    span.style.opacity = '0';
-    span.style.opacity = '';
-    const caret = document.createElement('span');
-    caret.className = 'type-caret';
-    span.after(caret);
-    const delay = 400 + idx * 550;
-    setTimeout(() => {
-      const text = finalText();
-      let i = 0;
-      const tick = setInterval(() => {
-        span.textContent = text.slice(0, ++i);
-        if (i >= text.length) clearInterval(tick);
-      }, 28);
-    }, delay);
+  /* ---------- hero cursor spotlight ---------- */
+  const hero = document.querySelector('.hero');
+  const spot = document.querySelector('.hero-spot');
+  if (hero && spot && !prefersReduced) {
+    hero.addEventListener('mousemove', e => {
+      const r = hero.getBoundingClientRect();
+      spot.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      spot.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  }
+
+  /* ---------- hero name per language ---------- */
+  const HERO_NAME_EN = '<span class="word" style="--i:0"><span>Ali</span></span> <span class="word" style="--i:1"><em><span>Khatibi</span></em></span>';
+  const h1Name = document.querySelector('.hero-name');
+  function renderHeroName() {
+    h1Name.innerHTML = currentLang === 'fa' ? I18N.fa['hero-name'] : HERO_NAME_EN;
+  }
+
+  /* ---------- cards tilt ---------- */
+  document.querySelectorAll('.tilt-ready').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      if (prefersReduced) return;
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(600px) rotateX(' + (-y * 8) + 'deg) rotateY(' + (x * 8) + 'deg) scale3d(1.02, 1.02, 1.02)';
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
-  // retype on language switch
-  function retypeHeroMeta() {
+
+  /* ---------- metal player jitter ---------- */
+  const playerBars = document.querySelectorAll('.app-bars span');
+  function jitterPlayer() {
+    playerBars.forEach((b, i) => {
+      b.style.setProperty('--h', Math.random().toFixed(2));
+      b.style.setProperty('--d', (i + Math.random() * 2.5).toFixed(2));
+    });
+  }
+  setInterval(jitterPlayer, 2100);
+
+  /* ---------- app preview live timer ---------- */
+  const appTime = document.getElementById('appTime');
+  if (appTime) setInterval(() => {
+    const m = Math.floor(Math.random() * 26) + 10;
+    const s = Math.floor(Math.random() * 60);
+    appTime.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }, 2700);
+
+  /* ---------- nav pill + rail ---------- */
+  const pill = document.querySelector('.nav-pill');
+  const railLinks = [...document.querySelectorAll('.rail a[href^="#"]')];
+  function movePill(target) {
+    if (!pill || !target) return;
+    const r = target.getBoundingClientRect();
+    const parent = pill.parentElement.getBoundingClientRect();
+    pill.style.left = (r.left - parent.left) + 'px';
+    pill.style.width = r.width + 'px';
+    pill.style.opacity = '1';
+  }
+  const navLinksContainer = document.querySelector('.nav-links');
+  navLinksContainer.addEventListener('mouseenter', e => {
+    const a = e.target.closest('a');
+    if (a && navLinksContainer.contains(a)) movePill(a);
+  });
+  navLinksContainer.addEventListener('mouseleave', () => {
+    if (pill) pill.style.opacity = '0';
+  });
+
+  /* ---------- hero typing effect ---------- */
+  const heroMetaSpans = document.querySelectorAll('.hero-meta [data-i18n]');
+  const typingTimers = [];
+
+  function clearTyping() {
+    while (typingTimers.length) {
+      const id = typingTimers.pop();
+      clearInterval(id);
+      clearTimeout(id);
+    }
+    document.querySelectorAll('.type-caret').forEach(el => el.remove());
+  }
+
+  function typeHeroMeta() {
+    clearTyping();
     heroMetaSpans.forEach((span, idx) => {
-      const text = I18N[currentLang][span.dataset.i18n];
+      const text = (I18N[currentLang] && I18N[currentLang][span.dataset.i18n]) || '';
       span.textContent = '';
-      const oldCaret = span.nextElementSibling;
-      if (oldCaret && oldCaret.classList.contains('type-caret')) oldCaret.remove();
+      if (prefersReduced) { span.textContent = text; return; }
+
       const caret = document.createElement('span');
       caret.className = 'type-caret';
+      caret.setAttribute('aria-hidden', 'true');
       span.after(caret);
-      setTimeout(() => {
+
+      typingTimers.push(setTimeout(() => {
         let i = 0;
         const tick = setInterval(() => {
           span.textContent = text.slice(0, ++i);
           if (i >= text.length) clearInterval(tick);
-        }, 28);
-      }, 250 + idx * 450);
+        }, 26);
+        typingTimers.push(tick);
+      }, 320 + idx * 460));
     });
   }
 
@@ -1111,14 +2018,24 @@
   // ---------- i18n ----------
   const I18N = {
     en: {
+      'skip': 'Skip to content',
       'nav-about': 'About', 'nav-projects': 'Projects', 'nav-interests': 'Interests', 'nav-contact': 'Contact',
       'hero-eyebrow': 'grade 12 · konkur math–physics · occasional builder',
       'hero-tagline': 'Konkur student by day, hobbyist coder after hours. I build small tools for the fun of it — most recently <a href="#projects" class="inline-link">TestBox</a> — and I\'m spending this year on the math–physics track.',
       'hero-meta-1': 'konkur candidate', 'hero-meta-2': 'built TestBox', 'hero-meta-3': 'Mashhad, Iran',
+      'hero-meta-4': 'metalhead — tech death · funeral doom',
       'hero-scroll': 'scroll',
+      'hero-name': 'Ali <em>Khatibi</em>',
+      'index-1': '01', 'index-2': '02', 'index-3': '03', 'index-4': '04', 'index-5': '05',
+      'rail-about': 'about', 'rail-skills': 'menu', 'rail-interests': 'interests', 'rail-projects': 'projects', 'rail-contact': 'contact',
+      'player-state': 'now spinning · funeral doom',
+      'app-title': 'TestBox · study session', 'app-chip': 'v1.0.0 · offline', 'app-timer': 'exam mode · stopwatch',
+      'marquee-1': 'konkur', 'marquee-2': 'C++', 'marquee-3': 'tech death', 'marquee-4': 'funeral doom', 'marquee-5': 'Mashhad', 'marquee-6': 'TestBox',
+      'footer-mark': 'ALI KHATIBI',
       'about-eyebrow': 'about',
       'about-p1': 'I\'m a 12th grader at <strong>Hasheminejad High School</strong> in Mashhad, spending this year preparing for the <strong>konkur</strong> on the math–physics track. Before that, I spent a few good years deep in C++ and algorithms as a <strong>Computer Olympiad</strong> trainee — including competing in Round 2 of the national olympiad, where my run ended.',
       'about-p2': 'The olympiad taught me how to think; programming is how I relax. I still write code for the fun of it — small tools built to learn something new, like <strong>TestBox</strong>, an offline-first study app I actually use myself. Off the screen: volleyball court, good playlists, and a never-ending debate over what to order at the café.',
+      'about-p3': 'The playlists run heavy. I\'m a metalhead — mostly <strong>tech death</strong> for its precision and density, and <strong>funeral doom</strong> for its patience. Two ends of the same instinct that pulled me into algorithms: build something with structure, then let it breathe.',
       'skills-eyebrow': 'the menu',
       'menu-title': 'Training Menu', 'menu-sub': '— served in C++, best with coffee —',
       'menu-1': 'C++', 'menu-1t': 'first language',
@@ -1128,10 +2045,12 @@
       'menu-5': 'Math & Physics', 'menu-5t': 'konkur track',
       'menu-6': 'Competitive Programming',
       'menu-note': '— also brews a decent cup and can do a bit of latte art, off the menu —',
+      'menu-note-2': '— off the menu: tech death · funeral doom, always on —',
       'int-eyebrow': 'away from the screen',
       'int-1': 'Volleyball', 'int-1p': 'On the court more often than not.',
-      'int-2': 'Music', 'int-2p': 'There\'s usually something playing in the background.',
+      'int-2': 'Metal', 'int-2p': 'Tech death for the precision, funeral doom for the patience.',
       'int-3': 'Cafés', 'int-3p': 'Unofficial expert in cozy corners and good coffee.',
+      'metal-tag-1': 'tech death', 'metal-tag-2': 'funeral doom',
       'proj-eyebrow': 'projects',
       'proj-sub': 'offline-first study & test companion — web · windows · android',
       'proj-desc': 'An app I built to manage practice tests: organize exams into folders and subjects, solve sheets with an exam timer or practice stopwatch, track daily study on a calendar, and review marked questions. Everything works offline and syncs when you\'re back. Built for my own konkur prep — and it shows: I use it every day.',
@@ -1142,18 +2061,29 @@
       'proj-demo': 'Live demo', 'proj-src': 'Source', 'proj-dl': 'Windows & Android',
       'proj-note': '— more experiments stay in the drawer until they\'re worth showing —',
       'con-eyebrow': 'connect',
-      'footer': 'Ali Khatibi · konkur by day, code for fun',
-      'title': 'Ali Khatibi — Konkur Student & Hobbyist Coder'
+      'footer': 'Ali Khatibi · konkur by day, code for fun, doom by night',
+      'title': 'Ali Khatibi — Konkur Student & Hobbyist Coder',
+      'meta-desc': 'Ali Khatibi — grade 12 konkur student (math–physics), building small tools like TestBox for fun.'
     },
     fa: {
+      'skip': 'رفتن به محتوا',
       'nav-about': 'درباره', 'nav-projects': 'پروژه‌ها', 'nav-interests': 'علایق', 'nav-contact': 'ارتباط',
       'hero-eyebrow': 'پایه دوازدهم · کنکور ریاضی‌فیزیک · برنامه‌نویس تفننی',
       'hero-tagline': 'روزها پای کتاب کنکورم، وقت‌های آزاد هم پای کد. چیزهای کوچیکی می‌سازم فقط برای لذت ساختن — آخرینش <a href="#projects" class="inline-link">TestBox</a> بود — هرچند این روزها عمده وقتم به ریاضی و فیزیک می‌رسه.',
       'hero-meta-1': 'کنکوری', 'hero-meta-2': 'سازنده TestBox', 'hero-meta-3': 'مشهد، ایران',
+      'hero-meta-4': 'متال‌هد — تک‌دث · فیونرال دوم',
       'hero-scroll': 'پایین',
+      'hero-name': 'علی <em>خطیبی</em>',
+      'index-1': '۰۱', 'index-2': '۰۲', 'index-3': '۰۳', 'index-4': '۰۴', 'index-5': '۰۵',
+      'rail-about': 'درباره', 'rail-skills': 'منو', 'rail-interests': 'علایق', 'rail-projects': 'پروژه‌ها', 'rail-contact': 'ارتباط',
+      'player-state': 'در حال پخش · فیونرال دوم',
+      'app-title': 'TestBox · جلسه مطالعه', 'app-chip': 'نسخه ۱ · آفلاین', 'app-timer': 'حالت آزمون · تایمر',
+      'marquee-1': 'کنکور', 'marquee-2': '++C', 'marquee-3': 'تک‌دث', 'marquee-4': 'فیونرال دوم', 'marquee-5': 'مشهد', 'marquee-6': 'TestBox',
+      'footer-mark': 'علی خطیبی',
       'about-eyebrow': 'درباره من',
       'about-p1': 'پایه دوازدهم <strong>هاشمی‌نژاد</strong> مشهدم و امسال تمام‌وقت درگیر <strong>کنکور ریاضی‌فیزیک</strong>. قبلش چند سال خوبی رو با <strong>المپیاد کامپیوتر</strong> گذروندم — ++C و الگوریتم، صبح تا شب. تا مرحله دوم هم رفتم، اونجا مسیرم به پایان رسید.',
       'about-p2': 'المپیاد یادم داد چطور فکر کنم؛ برنامه‌نویسی شده راه تفریحم. هنوز گاهی برای لذت کد می‌زنم — چیزهای کوچیک برای یادگیری، مثل <strong>TestBox</strong> که یه اپ مطالعه آفلاینه و هر روز خودم ازش استفاده می‌کنم. بیرون از دنیای کد هم: زمین والیبال، یه پلی‌لیست همیشه‌پخش، و کلنجار همیشگی با منوی کافه.',
+      'about-p3': 'پلی‌لیست‌هام سنگین‌اند. متال‌هدم — بیشتر <strong>تک‌دث</strong> برای دقت و بافت فشرده‌اش، و <strong>فیونرال دوم</strong> برای حوصله و سنگینی‌اش. دو سر یک حس مشترک که من رو هم کشید سمت الگوریتم: چیزی با ساختار بساز، بعد بذار نفس بکشه.',
       'skills-eyebrow': 'منو',
       'menu-title': 'منوی تمرین', 'menu-sub': '— با طعم ++C، بهتره با قهوه میل بشه —',
       'menu-1': '++C', 'menu-1t': 'زبان اول',
@@ -1163,10 +2093,12 @@
       'menu-5': 'ریاضی و فیزیک', 'menu-5t': 'رشته کنکور',
       'menu-6': 'برنامه‌نویسی رقابتی',
       'menu-note': '— قهوه هم خوب دم می‌کنه و کمی لاته‌آرت هم بلده؛ خارج از منو —',
+      'menu-note-2': '— خارج از منو: تک‌دث · فیونرال دوم، همیشه در حال پخش —',
       'int-eyebrow': 'وقتی پشت مانیتور نیستم',
       'int-1': 'والیبال', 'int-1p': 'بیشتر وقت‌ها رو زمین پیدا می‌شه.',
-      'int-2': 'موسیقی', 'int-2p': 'معمولاً یه چیزی در پس‌زمینه پخش می‌شه.',
+      'int-2': 'متال', 'int-2p': 'تک‌دث برای دقتش، فیونرال دوم برای حوصله‌اش.',
       'int-3': 'کافه', 'int-3p': 'متخصص غیررسمی گوشه‌های دنج و قهوه خوب.',
+      'metal-tag-1': 'تک‌دث', 'metal-tag-2': 'فیونرال دوم',
       'proj-eyebrow': 'پروژه‌ها',
       'proj-sub': 'همراه مطالعه و آزمون، حتی آفلاین — وب · ویندوز · اندروید',
       'proj-desc': 'اپی که برای مدیریت آزمون‌های تمرینی ساختم: آزمون‌ها رو تو پوشه و درس مرتب می‌کنی، با تایمر آزمون یا کرنومتر تمرین برگه می‌زنی، مطالعه روزانه‌ات رو روی تقویم می‌بینی و سوال‌های علامت‌دار رو مرور می‌کنی. همه‌ش آفلاین کار می‌کنه و اینترنت که برگرده خودش سینک می‌شه. برای کنکور خودم ساختمش — و انصافاً داره استفاده می‌شه: هر روز بازش می‌کنم.',
@@ -1177,8 +2109,9 @@
       'proj-demo': 'نسخه آنلاین', 'proj-src': 'سورس کد', 'proj-dl': 'دانلود ویندوز و اندروید',
       'proj-note': '— بقیه پروژه‌ها تو کشو مونده‌ان تا یه روزی درست‌وحسابی بشن —',
       'con-eyebrow': 'راه‌های ارتباط',
-      'footer': 'علی خطیبی · روزها کنکور، شب‌ها کد',
-      'title': 'علی خطیبی — دانش‌آموز کنکور و برنامه‌نویس تفننی'
+      'footer': 'علی خطیبی · روزها کنکور، شب‌ها کد و دوم',
+      'title': 'علی خطیبی — دانش‌آموز کنکور و برنامه‌نویس تفننی',
+      'meta-desc': 'علی خطیبی — دانش‌آموز پایه دوازدهم ریاضی‌فیزیک، سازنده ابزارهای کوچیکی مثل TestBox و متال‌هد.'
     }
   };
 
@@ -1186,35 +2119,43 @@
 
   function applyLang(lang) {
     currentLang = lang;
+    const dict = I18N[lang];
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-    document.title = I18N[lang]['title'];
+    document.title = dict['title'];
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc && dict['meta-desc']) desc.setAttribute('content', dict['meta-desc']);
     document.querySelectorAll('[data-i18n]').forEach(el => {
-      const v = I18N[lang][el.dataset.i18n];
+      const v = dict[el.dataset.i18n];
       if (v !== undefined) el.textContent = v;
     });
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
-      const v = I18N[lang][el.dataset.i18nHtml];
+      const v = dict[el.dataset.i18nHtml];
       if (v !== undefined) el.innerHTML = v;
     });
-    document.getElementById('langToggle').textContent = lang === 'fa' ? 'EN' : 'FA';
+    const btn = document.getElementById('langToggle');
+    btn.textContent = lang === 'fa' ? 'EN' : 'FA';
+    btn.setAttribute('aria-label', lang === 'fa' ? 'Switch to English' : 'تغییر زبان به فارسی');
     try { localStorage.setItem('lang', lang); } catch (e) {}
   }
 
   const savedLang = (() => { try { return localStorage.getItem('lang'); } catch (e) { return null; } })();
   applyLang(savedLang === 'fa' ? 'fa' : 'en');
+  renderHeroName();
+  typeHeroMeta();
 
+  const wrapEl = document.querySelector('.wrap');
   document.getElementById('langToggle').addEventListener('click', () => {
     const next = currentLang === 'fa' ? 'en' : 'fa';
-    const wrap = document.querySelector('.wrap');
-    if (wrap && !prefersReduced) {
-      wrap.id = 'langFade';
+    const apply = () => {
       applyLang(next);
-      retypeHeroMeta();
-      setTimeout(() => { wrap.removeAttribute('id'); }, 500);
+      renderHeroName();
+      typeHeroMeta();
+    };
+    if (!prefersReduced && document.startViewTransition) {
+      document.startViewTransition(apply);
     } else {
-      applyLang(next);
-      retypeHeroMeta();
+      apply();
     }
   });
 </script>
