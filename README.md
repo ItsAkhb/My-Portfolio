@@ -18,7 +18,9 @@ A single-file portfolio site (pure HTML/CSS/JS, zero build step) with a warm dar
 
 - 🌍 **Bilingual** — English default, full Persian (RTL) with one click
 - 📦 **Real projects** — features [TestBox](https://github.com/ItsAkhb/TestBox), my offline-first study app for web · Windows · Android
+- 🎸 **A real taste** — metalhead: tech death for the precision, funeral doom for the patience
 - 🎞️ **Alive UI** — terminal-style hero typing, mouse-parallax graph, scrollspy nav, staggered reveals, scroll progress bar
+- 🔗 **Shareable** — Open Graph card, structured data, inline SVG favicon
 - ♿ **Respectful** — honors `prefers-reduced-motion`, keyboard-focus styles, no frameworks
 
 ## 🧰 Built with
